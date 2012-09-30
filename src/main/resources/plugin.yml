@@ -15,7 +15,7 @@ permissions:
         default: op
         description: Allows full use of mChat.
         children:
-            mchat.reload.*: true
-    mchannel.group.remove.wvar:
+            mchat.reload: true
+    mchannel.reload:
         default: false
-        description: Allow usage of /mchat group remove wvar Group World InfoVariable
+        description: Allow usage of /mchannel reload command.

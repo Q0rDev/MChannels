@@ -44,6 +44,9 @@ public class MChannelsCommand implements CommandExecutor {
         }
 
         if (args[0].equalsIgnoreCase("reload")) {
+            if (!MiscUtil.hasCommandPerm(sender, "mchannel.reload"))
+                return true;
+
             ChannelManager.reloadChannels();
             MessageUtil.sendMessage(sender, "Channels Reloaded.");
 
