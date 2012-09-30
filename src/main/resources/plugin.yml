@@ -1,0 +1,21 @@
+name: MChannels
+main: com.miraclem4n.mchannels.MChannels
+version: ${m.version}-${build.number}-${p.version}
+author: MiracleM4n
+authors: [MiracleM4n]
+website: http://mdev.in/
+thread: http://forums.bukkit.org/threads/22958/
+softdepend: [mChatSuite, MChat]
+description: MChat's Channel Implementation
+commands:
+    mchannel:
+        aliases: [mchann, mchan]
+permissions:
+    mchannel.*:
+        default: op
+        description: Allows full use of mChat.
+        children:
+            mchat.reload.*: true
+    mchannel.group.remove.wvar:
+        default: false
+        description: Allow usage of /mchat group remove wvar Group World InfoVariable
