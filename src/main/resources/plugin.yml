@@ -4,7 +4,6 @@ version: ${m.version}-${build.number}-${p.version}
 author: MiracleM4n
 authors: [MiracleM4n]
 website: http://mdev.in/
-thread: http://forums.bukkit.org/threads/22958/
 softdepend: [mChatSuite, MChat]
 description: MChat's Channel Implementation
 commands:
@@ -13,9 +12,9 @@ commands:
 permissions:
     mchannel.*:
         default: op
-        description: Allows full use of mChat.
+        description: Allows full use of MChannels.
         children:
-            mchat.reload: true
+            mchannel.reload: true
     mchannel.reload:
         default: false
         description: Allow usage of /mchannel reload command.
