@@ -4,7 +4,7 @@
     <!-- Project information -->
     <groupId>com.miraclem4n</groupId>
     <artifactId>MChannels</artifactId>
-    <version>${m.version}-${p.version}</version>
+    <version>1.4.5-R0.2</version>
     <name>MChannels</name>
     <url>http://mDev.in/</url>
     <description>MChat's Channel Implementation</description>
@@ -12,8 +12,6 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <build.number>Unknown</build.number>
-        <m.version>1.4.5</m.version>
-        <p.version>R0.1</p.version>
     </properties>
 
     <!-- Source code -->
@@ -109,7 +107,7 @@
         <dependency>
             <groupId>com.miraclem4n</groupId>
             <artifactId>MChat</artifactId>
-            <version>1.3.2-R1.0</version>
+            <version>1.4.5-R0.1</version>
             <type>jar</type>
             <scope>compile</scope>
         </dependency>

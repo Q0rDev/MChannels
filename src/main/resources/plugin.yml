@@ -1,6 +1,6 @@
 name: MChannels
 main: com.miraclem4n.mchannels.MChannels
-version: ${m.version}-${build.number}-${p.version}
+version: ${version}-${build.number}
 author: MiracleM4n
 authors: [MiracleM4n]
 website: http://mdev.in/
