@@ -18,7 +18,7 @@ public class ChannelUtil {
     }
 
     public static void load() {
-        file = new File("plugins/mChatSuite/channels.yml");
+        file = new File("plugins/MChannels/channels.yml");
 
         config = YamlConfiguration.loadConfiguration(file);
 
