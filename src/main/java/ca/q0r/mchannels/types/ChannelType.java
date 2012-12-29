@@ -1,4 +1,4 @@
-package com.miraclem4n.mchannels.types;
+package ca.q0r.mchannels.types;
 
 import java.util.HashMap;
 

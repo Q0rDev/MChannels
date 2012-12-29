@@ -2,11 +2,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <!-- Project information -->
-    <groupId>com.miraclem4n</groupId>
+    <groupId>ca.q0r</groupId>
     <artifactId>MChannels</artifactId>
-    <version>1.4.5-R0.5</version>
+    <version>1.4.5-R0.6</version>
     <name>MChannels</name>
-    <url>http://mDev.in/</url>
+    <url>http://mdev.in/</url>
     <description>MChat's Channel Implementation</description>
 
     <properties>
@@ -24,7 +24,7 @@
     <!-- Continuous integration -->
     <ciManagement>
         <system>jenkins</system>
-        <url>http://ci.mdev.in/job/${project.name}</url>
+        <url>http://ci.q0r.ca/job/${project.name}</url>
     </ciManagement>
 
     <!-- Repository locations -->
@@ -50,8 +50,8 @@
             </snapshots>
         </repository>
         <repository>
-            <id>mdev-repo</id>
-            <url>http://repo.mdev.in</url>
+            <id>q0r-repo</id>
+            <url>http://repo.q0r.ca</url>
             <releases>
                 <updatePolicy>always</updatePolicy>
             </releases>

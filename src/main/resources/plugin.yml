@@ -1,5 +1,5 @@
 name: MChannels
-main: com.miraclem4n.mchannels.MChannels
+main: ca.q0r.mchannels.MChannels
 version: ${version}-${build.number}
 author: MiracleM4n
 authors: [MiracleM4n]

@@ -1,8 +1,8 @@
-package com.miraclem4n.mchannels.channels;
+package ca.q0r.mchannels.channels;
 
-import com.miraclem4n.mchannels.configs.ChannelUtil;
-import com.miraclem4n.mchannels.types.ChannelEditType;
-import com.miraclem4n.mchannels.types.ChannelType;
+import ca.q0r.mchannels.configs.ChannelUtil;
+import ca.q0r.mchannels.types.ChannelEditType;
+import ca.q0r.mchannels.types.ChannelType;
 
 import java.util.HashSet;
 import java.util.Set;

@@ -1,9 +1,9 @@
-package com.miraclem4n.mchannels;
+package ca.q0r.mchannels;
 
-import com.miraclem4n.mchannels.channels.ChannelManager;
-import com.miraclem4n.mchannels.commands.MChannelsCommand;
-import com.miraclem4n.mchannels.configs.ChannelUtil;
-import com.miraclem4n.mchannels.events.ChannelListener;
+import ca.q0r.mchannels.channels.ChannelManager;
+import ca.q0r.mchannels.commands.MChannelsCommand;
+import ca.q0r.mchannels.configs.ChannelUtil;
+import ca.q0r.mchannels.events.ChannelListener;
 import com.miraclem4n.mchat.metrics.Metrics;
 import com.miraclem4n.mchat.util.MessageUtil;
 import com.miraclem4n.mchat.util.TimerUtil;

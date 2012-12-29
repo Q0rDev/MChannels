@@ -1,10 +1,10 @@
-package com.miraclem4n.mchannels.commands;
+package ca.q0r.mchannels.commands;
 
-import com.miraclem4n.mchannels.MChannels;
-import com.miraclem4n.mchannels.channels.Channel;
-import com.miraclem4n.mchannels.channels.ChannelManager;
-import com.miraclem4n.mchannels.types.ChannelEditType;
-import com.miraclem4n.mchannels.types.ChannelType;
+import ca.q0r.mchannels.MChannels;
+import ca.q0r.mchannels.channels.Channel;
+import ca.q0r.mchannels.channels.ChannelManager;
+import ca.q0r.mchannels.types.ChannelEditType;
+import ca.q0r.mchannels.types.ChannelType;
 import com.miraclem4n.mchat.api.Parser;
 import com.miraclem4n.mchat.util.MessageUtil;
 import com.miraclem4n.mchat.util.MiscUtil;

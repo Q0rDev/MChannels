@@ -1,8 +1,8 @@
-package com.miraclem4n.mchannels.events;
+package ca.q0r.mchannels.events;
 
-import com.miraclem4n.mchannels.MChannels;
-import com.miraclem4n.mchannels.channels.Channel;
-import com.miraclem4n.mchannels.channels.ChannelManager;
+import ca.q0r.mchannels.MChannels;
+import ca.q0r.mchannels.channels.Channel;
+import ca.q0r.mchannels.channels.ChannelManager;
 import com.miraclem4n.mchat.api.Parser;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;

@@ -1,4 +1,4 @@
-package com.miraclem4n.mchannels.configs;
+package ca.q0r.mchannels.configs;
 
 import org.bukkit.configuration.file.YamlConfiguration;
 
