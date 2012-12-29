@@ -4,7 +4,7 @@
     <!-- Project information -->
     <groupId>com.miraclem4n</groupId>
     <artifactId>MChannels</artifactId>
-    <version>1.4.5-R0.3</version>
+    <version>1.4.5-R0.4</version>
     <name>MChannels</name>
     <url>http://mDev.in/</url>
     <description>MChat's Channel Implementation</description>
