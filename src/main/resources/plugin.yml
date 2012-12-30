@@ -8,7 +8,7 @@ softdepend: [mChatSuite, MChat]
 description: MChat's Channel Implementation
 commands:
     mchannel:
-        aliases: [mchann, mchan]
+        aliases: [mchannels, mchann, mchan]
 permissions:
     mchannel.*:
         default: op
