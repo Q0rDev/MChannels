@@ -14,11 +14,8 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class MChannels extends JavaPlugin {
     // Default Plugin Data
-    public PluginManager pm;
-    public PluginDescriptionFile pdfFile;
-
-    // Metrics
-    public Metrics metrics;
+    private PluginManager pm;
+    private PluginDescriptionFile pdfFile;
 
     public void onEnable() {
         // Initialize Plugin Data
@@ -39,7 +36,7 @@ public class MChannels extends JavaPlugin {
             registerEvents();
 
             // Setup Command
-            regCommands("mchannel", new MChannelsCommand(this));
+            regCommands("mchannel", new MChannelsCommand());
 
             // Stop the Timer
             timer.stop();
@@ -80,17 +77,8 @@ public class MChannels extends JavaPlugin {
         pm.registerEvents(new ChannelListener(), this);
     }
 
-    public void reloadConfigs() {
-        ChannelUtil.initialize();
-    }
-
     void regCommands(String command, CommandExecutor executor) {
         if (getCommand(command) != null)
             getCommand(command).setExecutor(executor);
-    }
-
-    void initializeClasses() {
-        ChannelManager.initialize();
-
     }
 }

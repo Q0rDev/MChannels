@@ -14,11 +14,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 public class MChannelsCommand implements CommandExecutor {
-    MChannels plugin;
-
-    public MChannelsCommand(MChannels instance) {
-        plugin = instance;
-    }
+    public MChannelsCommand() { }
 
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         String cmd = command.getName();
