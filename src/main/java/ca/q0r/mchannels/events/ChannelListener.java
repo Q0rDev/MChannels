@@ -1,6 +1,5 @@
 package ca.q0r.mchannels.events;
 
-import ca.q0r.mchannels.MChannels;
 import ca.q0r.mchannels.channels.Channel;
 import ca.q0r.mchannels.channels.ChannelManager;
 import com.miraclem4n.mchat.api.Parser;
@@ -14,11 +13,7 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import java.util.Set;
 
 public class ChannelListener implements Listener {
-    MChannels plugin;
-
-    public ChannelListener(MChannels instance) {
-        plugin = instance;
-    }
+    public ChannelListener() { }
 
     @EventHandler(priority = EventPriority.LOW)
     public void onPlayerChat(AsyncPlayerChatEvent event) {

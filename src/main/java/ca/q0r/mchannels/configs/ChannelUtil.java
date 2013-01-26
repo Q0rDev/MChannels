@@ -5,8 +5,8 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import java.io.File;
 
 public class ChannelUtil {
-    static YamlConfiguration config;
-    static File file;
+    private static YamlConfiguration config;
+    private static File file;
 
     public static void initialize() {
         load();

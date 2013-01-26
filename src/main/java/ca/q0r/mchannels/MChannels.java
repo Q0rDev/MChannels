@@ -77,7 +77,7 @@ public class MChannels extends JavaPlugin {
     }
 
     void registerEvents() {
-        pm.registerEvents(new ChannelListener(this), this);
+        pm.registerEvents(new ChannelListener(), this);
     }
 
     public void reloadConfigs() {

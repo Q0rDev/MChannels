@@ -8,7 +8,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class ChannelManager {
-    static Set<Channel> channels = new HashSet<Channel>();
+    private static Set<Channel> channels = new HashSet<Channel>();
 
     public static void initialize() {
         channels = new HashSet<Channel>();

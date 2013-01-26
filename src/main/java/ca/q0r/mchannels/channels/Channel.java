@@ -11,11 +11,11 @@ import java.util.Map;
 import java.util.Set;
 
 public class Channel {
-    HashMap<String, Boolean> occupants;
-    String name, prefix, suffix, password;
-    ChannelType type;
-    Integer distance;
-    Boolean passworded, defaulted;
+    private HashMap<String, Boolean> occupants;
+    private String name, prefix, suffix, password;
+    private ChannelType type;
+    private Integer distance;
+    private Boolean passworded, defaulted;
 
     public Channel(String name, ChannelType type, String prefix, String suffix, Boolean passworded, String password, Integer distance, Boolean defaulted) {
         this.name = name.toLowerCase();
@@ -86,7 +86,7 @@ public class Channel {
     }
 
     public void addOccupant(String occupant, Boolean state) {
-        if (occupant == null || state == null || occupants.get(occupant) != null)
+        if (occupant == null || state == null)
             return;
 
         occupants.put(occupant, state);
