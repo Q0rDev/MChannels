@@ -4,7 +4,7 @@
     <!-- Project information -->
     <groupId>ca.q0r</groupId>
     <artifactId>MChannels</artifactId>
-    <version>1.4.5-R0.1.2</version>
+    <version>1.5.1-R0.1</version>
     <name>MChannels</name>
     <url>http://mdev.in/</url>
     <description>MChat's Channel Implementation</description>
@@ -100,14 +100,14 @@
         <dependency>
             <groupId>org.bukkit</groupId>
             <artifactId>bukkit</artifactId>
-            <version>1.4.5-R1.0</version>
+            <version>1.5.1-R0.1</version>
             <type>jar</type>
             <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>ca.q0r</groupId>
             <artifactId>MChat</artifactId>
-            <version>1.4.5-R0.13</version>
+            <version>1.5.1-R0.1</version>
             <type>jar</type>
             <scope>compile</scope>
         </dependency>
