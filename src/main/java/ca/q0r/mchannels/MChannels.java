@@ -4,7 +4,6 @@ import ca.q0r.mchannels.channels.ChannelManager;
 import ca.q0r.mchannels.commands.MChannelsCommand;
 import ca.q0r.mchannels.configs.ChannelUtil;
 import ca.q0r.mchannels.events.ChannelListener;
-import com.miraclem4n.mchat.metrics.Metrics;
 import com.miraclem4n.mchat.util.MessageUtil;
 import com.miraclem4n.mchat.util.TimerUtil;
 import org.bukkit.command.CommandExecutor;

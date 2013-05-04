@@ -1,6 +1,5 @@
 package ca.q0r.mchannels.commands;
 
-import ca.q0r.mchannels.MChannels;
 import ca.q0r.mchannels.channels.Channel;
 import ca.q0r.mchannels.channels.ChannelManager;
 import ca.q0r.mchannels.types.ChannelEditType;
