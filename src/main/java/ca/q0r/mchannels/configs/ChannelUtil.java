@@ -25,8 +25,9 @@ public class ChannelUtil {
         config.options().indent(4);
         config.options().header("MChat Channels");
 
-        if (!file.exists())
+        if (!file.exists()) {
             loadDefaults();
+        }
     }
 
     private static void loadDefaults() {

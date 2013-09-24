@@ -15,8 +15,9 @@ public enum ChannelType {
     private static final HashMap<String, ChannelType> nMap = new HashMap<String, ChannelType>();
 
     static {
-        for (ChannelType type : values())
+        for (ChannelType type : values()) {
             nMap.put(type.name.toLowerCase(), type);
+        }
     }
 
     ChannelType(String name) {
@@ -28,8 +29,9 @@ public enum ChannelType {
     }
 
     public static ChannelType fromName(String name) {
-        if (name == null)
+        if (name == null) {
             return null;
+        }
 
         return nMap.get(name.toLowerCase());
     }

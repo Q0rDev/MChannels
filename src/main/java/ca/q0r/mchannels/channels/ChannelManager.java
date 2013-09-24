@@ -35,8 +35,9 @@ public class ChannelManager {
             Integer distance = ChannelUtil.getConfig().getInt(key + ".distance", -1);
             Boolean defaulted = ChannelUtil.getConfig().getBoolean(key + ".default", false);
 
-            if (type == null)
+            if (type == null) {
                 type = ChannelType.GLOBAL;
+            }
 
             channels.add(new Channel(key.toLowerCase(), type, prefix, suffix, passworded, password, distance, defaulted));
         }
@@ -101,8 +102,9 @@ public class ChannelManager {
         ChannelUtil.getConfig().set(name.toLowerCase() + ".distance", distance);
         ChannelUtil.getConfig().set(name.toLowerCase() + ".default", defaulted);
 
-        if (defaulted)
+        if (defaulted) {
             setDefaultChannel(name);
+        }
 
         ChannelUtil.save();
     }
@@ -114,11 +116,12 @@ public class ChannelManager {
     public static void removeChannel(String name) {
         Boolean isReal = false;
 
-        for (Channel channel : channels)
+        for (Channel channel : channels) {
             if (channel.getName().equalsIgnoreCase(name)) {
                 isReal = true;
                 break;
             }
+        }
 
         if (isReal) {
             channels.remove(getChannel(name));
@@ -135,9 +138,11 @@ public class ChannelManager {
      * @return Channel being sought after or null.
      */
     public static Channel getChannel(String name) {
-        for (Channel channel : channels)
-            if (channel.getName().equalsIgnoreCase(name))
+        for (Channel channel : channels) {
+            if (channel.getName().equalsIgnoreCase(name)) {
                 return channel;
+            }
+        }
 
         return null;
     }
@@ -146,8 +151,9 @@ public class ChannelManager {
      * Saves all Channels in Memory to ChannelUtil.
      */
     public static void saveChannels() {
-        for (Channel channel : channels)
+        for (Channel channel : channels) {
             saveChannel(channel);
+        }
     }
 
     /**
@@ -172,6 +178,7 @@ public class ChannelManager {
      */
     public static void setDefaultChannel(String name) {
         Boolean hasDefaulted = false;
+
         for (Channel channel : channels) {
             if (channel.getName().equalsIgnoreCase(name)) {
                 channel.setDefault(true);
@@ -189,9 +196,11 @@ public class ChannelManager {
      * @return Default Channel or null.
      */
     public static Channel getDefaultChannel() {
-        for (Channel channel : channels)
-            if (channel.isDefault())
+        for (Channel channel : channels) {
+            if (channel.isDefault()) {
                 return channel;
+            }
+        }
 
         return null;
     }
@@ -204,9 +213,11 @@ public class ChannelManager {
     public static Set<Channel> getPlayersActiveChannels(String player) {
         Set<Channel> channels = new HashSet<Channel>();
 
-        for (Channel channelz : getChannels())
-            if (channelz.getActiveOccupants().contains(player))
+        for (Channel channelz : getChannels()) {
+            if (channelz.getActiveOccupants().contains(player)) {
                 channels.add(channelz);
+            }
+        }
 
         return channels;
     }
@@ -219,9 +230,11 @@ public class ChannelManager {
     public static Set<Channel> getPlayersChannels(String player) {
         Set<Channel> channels = new HashSet<Channel>();
 
-        for (Channel channelz : getChannels())
-            if (channelz.getOccupants().contains(player))
+        for (Channel channelz : getChannels()) {
+            if (channelz.getOccupants().contains(player)) {
                 channels.add(channelz);
+            }
+        }
 
         return channels;
     }
@@ -234,24 +247,25 @@ public class ChannelManager {
      */
     public static void editChannel(Channel channel, ChannelEditType type, Object option) {
         if (option.getClass() == type.getOptionClass()) {
-            if (type.getName().equalsIgnoreCase("Name")) {
+            if (type.getName().equalsIgnoreCase("name")) {
                 ChannelUtil.getConfig().set(channel.getName(), null);
 
                 channel.setName((String) option);
-            } else if (type.getName().equalsIgnoreCase("Default"))
+            } else if (type.getName().equalsIgnoreCase("default")) {
                 setDefaultChannel(channel.getName());
-            else if (type.getName().equalsIgnoreCase("Distance"))
+            } else if (type.getName().equalsIgnoreCase("distance")) {
                 channel.setDistance((Integer) option);
-            else if (type.getName().equalsIgnoreCase("Password"))
+            } else if (type.getName().equalsIgnoreCase("password")) {
                 channel.setPassword((String) option);
-            else if (type.getName().equalsIgnoreCase("Passworded"))
+            } else if (type.getName().equalsIgnoreCase("passworded")) {
                 channel.setPassworded((Boolean) option, channel.getPassword());
-            else if (type.getName().equalsIgnoreCase("Prefix"))
+            } else if (type.getName().equalsIgnoreCase("prefix")) {
                 channel.setPrefix((String) option);
-            else if (type.getName().equalsIgnoreCase("Suffix"))
+            } else if (type.getName().equalsIgnoreCase("suffix")) {
                 channel.setSuffix((String) option);
-            else if (type.getName().equalsIgnoreCase("Type"))
+            } else if (type.getName().equalsIgnoreCase("type")) {
                 channel.setType((ChannelType) option);
+            }
 
             saveChannel(channel);
         }

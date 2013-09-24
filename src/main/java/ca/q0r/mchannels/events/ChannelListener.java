@@ -24,16 +24,20 @@ public class ChannelListener implements Listener {
 
         Set<Channel> channels = ChannelManager.getPlayersActiveChannels(player.getName());
 
-        if (channels.size() < 1)
+        if (channels.size() < 1) {
             return;
+        }
 
-        if (event.getMessage() == null)
+        if (event.getMessage() == null) {
             return;
+        }
 
-        for (Channel channel : channels)
-            if (channel.getOccupantAvailability(player.getName()))
+        for (Channel channel : channels) {
+            if (channel.getOccupantAvailability(player.getName())) {
                 channel.sendMessageFrom(player,
                         Parser.parseChatMessage(player.getName(), player.getWorld().getName(), event.getMessage()));
+            }
+        }
 
         event.setCancelled(true);
     }

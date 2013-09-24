@@ -88,7 +88,8 @@ public class MChannels extends JavaPlugin {
     }
 
     void regCommands(String command, CommandExecutor executor) {
-        if (getCommand(command) != null)
+        if (getCommand(command) != null) {
             getCommand(command).setExecutor(executor);
+        }
     }
 }

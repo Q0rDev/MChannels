@@ -46,8 +46,9 @@ public class Channel {
     }
 
     public void setName(String name) {
-        if (name == null)
+        if (name == null) {
             return;
+        }
 
         this.name = name.toLowerCase();
     }
@@ -57,8 +58,9 @@ public class Channel {
     }
 
     public void setType(ChannelType type) {
-        if (type == null)
+        if (type == null) {
             type = ChannelType.GLOBAL;
+        }
 
         this.type = type;
     }
@@ -74,9 +76,11 @@ public class Channel {
     public Set<String> getActiveOccupants() {
         Set<String> set = new HashSet<String>();
 
-        for (Map.Entry<String, Boolean> entry : occupants.entrySet())
-            if (entry.getValue())
+        for (Map.Entry<String, Boolean> entry : occupants.entrySet()) {
+            if (entry.getValue()) {
                 set.add(entry.getKey());
+            }
+        }
 
         return set;
     }
@@ -86,36 +90,41 @@ public class Channel {
     }
 
     public void addOccupant(String occupant, Boolean state) {
-        if (occupant == null || state == null)
+        if (occupant == null || state == null) {
             return;
+        }
 
         occupants.put(occupant, state);
     }
 
     public void removeOccupant(String occupant) {
-        if (occupant == null || occupants.get(occupant) == null)
+        if (occupant == null || occupants.get(occupant) == null) {
             return;
+        }
 
         occupants.remove(occupant);
     }
 
     public Boolean getOccupantAvailability(String occupant) {
-        if (occupant == null || occupants.get(occupant) == null)
+        if (occupant == null || occupants.get(occupant) == null) {
             return false;
+        }
 
         return occupants.get(occupant);
     }
 
     public void setOccupantAvailability(String occupant, Boolean state) {
-        if (occupant == null || state == null || occupants.get(occupant) == null)
+        if (occupant == null || state == null || occupants.get(occupant) == null) {
             return;
+        }
 
         occupants.put(occupant, state);
     }
 
     public void setPrefix(String prefix) {
-        if (prefix == null)
+        if (prefix == null) {
             return;
+        }
 
         this.prefix = prefix;
     }
@@ -125,8 +134,9 @@ public class Channel {
     }
 
     public void setSuffix(String suffix) {
-        if (suffix == null)
+        if (suffix == null) {
             return;
+        }
 
         this.suffix = suffix;
     }
@@ -136,8 +146,9 @@ public class Channel {
     }
 
     public void setDistance(Integer distance) {
-        if (distance == null)
+        if (distance == null) {
             return;
+        }
 
         this.distance = distance;
     }
@@ -151,8 +162,9 @@ public class Channel {
     }
 
     public void setPassworded(Boolean passworded, String password) {
-        if (passworded == null || password == null)
+        if (passworded == null || password == null) {
             return;
+        }
 
         type = ChannelType.PASSWORD;
 
@@ -161,8 +173,9 @@ public class Channel {
     }
 
     public void setPassword(String password) {
-        if (password == null)
+        if (password == null) {
             return;
+        }
 
         this.password = password;
     }
@@ -176,38 +189,44 @@ public class Channel {
     }
 
     public void setDefault(Boolean defaulted) {
-        if (defaulted == null)
+        if (defaulted == null) {
             return;
+        }
 
         this.defaulted = defaulted;
     }
 
     public void sendMessageFrom(Player player, String message) {
-        if (player == null || message == null)
+        if (player == null || message == null) {
             return;
+        }
 
         String msg = MessageUtil.addColour(prefix + name + suffix) + " " + message;
 
         for (String names : getActiveOccupants()) {
             Player playerz = Bukkit.getServer().getPlayer(names);
 
-            if (playerz == null)
+            if (playerz == null) {
                 continue;
+            }
 
             if (getType() == ChannelType.PASSWORD
                     || getType() == ChannelType.PRIVATE || getType() == ChannelType.GLOBAL) {
                 playerz.sendMessage(msg);
             } else if (getType() == ChannelType.LOCAL) {
                 if (playerz.getWorld().getName().equals(player.getWorld().getName())
-                        && playerz.getLocation().distance(player.getLocation()) > distance)
+                        && playerz.getLocation().distance(player.getLocation()) > distance) {
                     playerz.sendMessage(msg);
+                }
             } else if (getType() == ChannelType.WORLD) {
-                if (playerz.getWorld().getName().equals(player.getWorld().getName()))
+                if (playerz.getWorld().getName().equals(player.getWorld().getName())) {
                     playerz.sendMessage(msg);
+                }
             } else if (getType() == ChannelType.CHUNK) {
                 if (playerz.getWorld().getName().equals(player.getWorld().getName())
-                        && playerz.getLocation().getChunk() == player.getLocation().getChunk())
+                        && playerz.getLocation().getChunk() == player.getLocation().getChunk()) {
                     playerz.sendMessage(msg);
+                }
             }
         }
 
@@ -215,16 +234,18 @@ public class Channel {
     }
 
     public void broadcastMessage(String message) {
-        if (message == null)
+        if (message == null) {
             return;
+        }
 
         String msg = MessageUtil.addColour(prefix + name + suffix + " " + message);
 
         for (String names : getActiveOccupants()) {
             Player playerz = Bukkit.getServer().getPlayer(names);
 
-            if (playerz == null)
+            if (playerz == null) {
                 continue;
+            }
 
             playerz.sendMessage(msg);
         }

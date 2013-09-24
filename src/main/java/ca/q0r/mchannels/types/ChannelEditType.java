@@ -18,8 +18,9 @@ public enum ChannelEditType {
     private static final HashMap<String, ChannelEditType> nMap = new HashMap<String, ChannelEditType>();
 
     static {
-        for (ChannelEditType type : values())
+        for (ChannelEditType type : values()) {
             nMap.put(type.name.toLowerCase(), type);
+        }
     }
 
     ChannelEditType(String name, Class<?> clazz) {
@@ -36,8 +37,9 @@ public enum ChannelEditType {
     }
 
     public static ChannelEditType fromName(String name) {
-        if (name == null)
+        if (name == null) {
             return null;
+        }
 
         return nMap.get(name.toLowerCase());
     }

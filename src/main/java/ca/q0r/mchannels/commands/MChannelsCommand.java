@@ -18,8 +18,9 @@ public class MChannelsCommand implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         String cmd = command.getName();
 
-        if (!cmd.equalsIgnoreCase("mchannel"))
+        if (!cmd.equalsIgnoreCase("mchannel")) {
             return true;
+        }
 
         if (args.length < 1) {
             String[] message = new String[] {
@@ -39,21 +40,24 @@ public class MChannelsCommand implements CommandExecutor {
         }
 
         if (args[0].equalsIgnoreCase("reload")) {
-            if (!CommandUtil.hasCommandPerm(sender, "mchannel.reload"))
+            if (!CommandUtil.hasCommandPerm(sender, "mchannel.reload")) {
                 return true;
+            }
 
             ChannelManager.reloadChannels();
             MessageUtil.sendMessage(sender, "Channels Reloaded.");
 
             return true;
         } else if (args[0].equalsIgnoreCase("types")) {
-            if (!CommandUtil.hasCommandPerm(sender, "mchannel.types"))
+            if (!CommandUtil.hasCommandPerm(sender, "mchannel.types")) {
                 return true;
+            }
 
             String types = "";
 
-            for (ChannelType type : ChannelType.values())
+            for (ChannelType type : ChannelType.values()) {
                 types += " " + type.getName();
+            }
 
             types = types.trim();
 
@@ -61,13 +65,15 @@ public class MChannelsCommand implements CommandExecutor {
 
             return true;
         } else if (args[0].equalsIgnoreCase("editTypes")) {
-            if (!CommandUtil.hasCommandPerm(sender, "mchannel.edittypes"))
+            if (!CommandUtil.hasCommandPerm(sender, "mchannel.edittypes")) {
                 return true;
+            }
 
             String editTypes = "";
 
-            for (ChannelEditType type : ChannelEditType.values())
+            for (ChannelEditType type : ChannelEditType.values()) {
                 editTypes += " " + type.getName();
+            }
 
             editTypes = editTypes.trim();
 
@@ -80,8 +86,9 @@ public class MChannelsCommand implements CommandExecutor {
                 return true;
             }
 
-            if (!CommandUtil.hasCommandPerm(sender, "mchannel.create." + args[1].toLowerCase()))
+            if (!CommandUtil.hasCommandPerm(sender, "mchannel.create." + args[1].toLowerCase())) {
                 return true;
+            }
 
             ChannelType type = ChannelType.fromName(args[2]);
 
@@ -126,8 +133,9 @@ public class MChannelsCommand implements CommandExecutor {
                 return true;
             }
 
-            if (!CommandUtil.hasCommandPerm(sender, "mchannel.remove." + args[1].toLowerCase()))
+            if (!CommandUtil.hasCommandPerm(sender, "mchannel.remove." + args[1].toLowerCase())) {
                 return true;
+            }
 
             if (ChannelManager.getChannel(args[1]) == null) {
                 MessageUtil.sendMessage(sender, "'" + args[1] + "' is not a valid channel.");
@@ -144,8 +152,9 @@ public class MChannelsCommand implements CommandExecutor {
                 return true;
             }
 
-            if (!CommandUtil.hasCommandPerm(sender, "mchannel.edit." + args[1].toLowerCase()))
+            if (!CommandUtil.hasCommandPerm(sender, "mchannel.edit." + args[1].toLowerCase())) {
                 return true;
+            }
 
             if (ChannelManager.getChannel(args[1]) == null) {
                 MessageUtil.sendMessage(sender, "'" + args[1] + "' is not a valid channel.");
@@ -167,20 +176,21 @@ public class MChannelsCommand implements CommandExecutor {
                     MessageUtil.sendMessage(sender, "You have successfully edited '" + args[1].toLowerCase() + "'.");
 
                     return true;
-                } else if (edit.getName().equalsIgnoreCase("Name"))
+                } else if (edit.getName().equalsIgnoreCase("name")) {
                     option = args[3];
-                else if (edit.getName().equalsIgnoreCase("Distance"))
+                } else if (edit.getName().equalsIgnoreCase("distance")) {
                     option = Integer.valueOf(args[3]);
-                else if (edit.getName().equalsIgnoreCase("Password"))
+                } else if (edit.getName().equalsIgnoreCase("password")) {
                     option = args[3];
-                else if (edit.getName().equalsIgnoreCase("Passworded"))
+                } else if (edit.getName().equalsIgnoreCase("passworded")) {
                     option = Boolean.parseBoolean(args[3]);
-                else if (edit.getName().equalsIgnoreCase("Prefix"))
+                } else if (edit.getName().equalsIgnoreCase("prefix")) {
                     option = args[3];
-                else if (edit.getName().equalsIgnoreCase("Suffix"))
+                } else if (edit.getName().equalsIgnoreCase("suffix")) {
                     option = args[3];
-                else if (edit.getName().equalsIgnoreCase("Type"))
+                } else if (edit.getName().equalsIgnoreCase("type")) {
                     option = ChannelType.fromName(args[3]);
+                }
             } catch (Exception ignored) {
                 MessageUtil.sendMessage(sender, "Error when converting '" + args[3] + "' to an Object of type '" + ChannelEditType.fromName(args[2]).getOptionClass().getSimpleName() + "'.");
                 return true;
@@ -210,8 +220,9 @@ public class MChannelsCommand implements CommandExecutor {
                 return true;
             }
 
-            if (!CommandUtil.hasCommandPerm(sender, "mchannel.join." + args[1].toLowerCase()))
+            if (!CommandUtil.hasCommandPerm(sender, "mchannel.join." + args[1].toLowerCase())) {
                 return true;
+            }
 
             Channel channel = ChannelManager.getChannel(args[1]);
 
@@ -229,8 +240,9 @@ public class MChannelsCommand implements CommandExecutor {
                 if (args.length < 3) {
                     MessageUtil.sendMessage(sender, "'" + args[1] + "' is a Passworded channel. Please use '/" + cmd + " join [ChannelName] [Password]' to enter.");
                     return true;
-                } else if (!args[2].equalsIgnoreCase(channel.getPassword()))
+                } else if (!args[2].equalsIgnoreCase(channel.getPassword())) {
                     MessageUtil.sendMessage(sender, "Password entered for channel '" + args[1].toLowerCase() + "' is invalid.");
+                }
             }
 
             channel.addOccupant(sender.getName(), true);
@@ -243,8 +255,9 @@ public class MChannelsCommand implements CommandExecutor {
                 return true;
             }
 
-            if (!CommandUtil.hasCommandPerm(sender, "mchannel.leave." + args[1].toLowerCase()))
+            if (!CommandUtil.hasCommandPerm(sender, "mchannel.leave." + args[1].toLowerCase())) {
                 return true;
+            }
 
             Channel channel = ChannelManager.getChannel(args[1]);
 
@@ -268,8 +281,9 @@ public class MChannelsCommand implements CommandExecutor {
                 return true;
             }
 
-            if (!CommandUtil.hasCommandPerm(sender, "mchannel.away." + args[1].toLowerCase()))
+            if (!CommandUtil.hasCommandPerm(sender, "mchannel.away." + args[1].toLowerCase())) {
                 return true;
+            }
 
             Channel channel = ChannelManager.getChannel(args[1]);
 
@@ -295,8 +309,9 @@ public class MChannelsCommand implements CommandExecutor {
                 return true;
             }
 
-            if (!CommandUtil.hasCommandPerm(sender, "mchannel.back." + args[1].toLowerCase()))
+            if (!CommandUtil.hasCommandPerm(sender, "mchannel.back." + args[1].toLowerCase())) {
                 return true;
+            }
 
             Channel channel = ChannelManager.getChannel(args[1]);
 
