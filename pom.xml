@@ -4,7 +4,7 @@
     <!-- Project information -->
     <groupId>ca.q0r</groupId>
     <artifactId>MChannels</artifactId>
-    <version>1.6.2-R0.2</version>
+    <version>1.6.4-R0.1</version>
     <name>MChannels</name>
     <url>http://mdev.in/</url>
     <description>MChat's Channel Implementation</description>
@@ -32,16 +32,6 @@
         <repository>
             <id>bukkit-repo</id>
             <url>http://repo.bukkit.org/content/groups/public</url>
-            <releases>
-                <updatePolicy>always</updatePolicy>
-            </releases>
-            <snapshots>
-                <updatePolicy>always</updatePolicy>
-            </snapshots>
-        </repository>
-        <repository>
-            <id>spout-repo</id>
-            <url>http://nexus.spout.org/content/groups/public</url>
             <releases>
                 <updatePolicy>always</updatePolicy>
             </releases>
@@ -100,14 +90,14 @@
         <dependency>
             <groupId>org.bukkit</groupId>
             <artifactId>bukkit</artifactId>
-            <version>1.6.2-R1.0</version>
+            <version>1.6.4-R0.1-SNAPSHOT</version>
             <type>jar</type>
             <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>ca.q0r</groupId>
             <artifactId>MChat</artifactId>
-            <version>1.6.2-R0.2</version>
+            <version>1.6.4-R0.1</version>
             <type>jar</type>
             <scope>compile</scope>
         </dependency>

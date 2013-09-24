@@ -6,7 +6,7 @@ import ca.q0r.mchannels.types.ChannelEditType;
 import ca.q0r.mchannels.types.ChannelType;
 import com.miraclem4n.mchat.api.Parser;
 import com.miraclem4n.mchat.util.MessageUtil;
-import com.miraclem4n.mchat.util.MiscUtil;
+import com.miraclem4n.mchat.util.CommandUtil;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -39,7 +39,7 @@ public class MChannelsCommand implements CommandExecutor {
         }
 
         if (args[0].equalsIgnoreCase("reload")) {
-            if (!MiscUtil.hasCommandPerm(sender, "mchannel.reload"))
+            if (!CommandUtil.hasCommandPerm(sender, "mchannel.reload"))
                 return true;
 
             ChannelManager.reloadChannels();
@@ -47,7 +47,7 @@ public class MChannelsCommand implements CommandExecutor {
 
             return true;
         } else if (args[0].equalsIgnoreCase("types")) {
-            if (!MiscUtil.hasCommandPerm(sender, "mchannel.types"))
+            if (!CommandUtil.hasCommandPerm(sender, "mchannel.types"))
                 return true;
 
             String types = "";
@@ -61,7 +61,7 @@ public class MChannelsCommand implements CommandExecutor {
 
             return true;
         } else if (args[0].equalsIgnoreCase("editTypes")) {
-            if (!MiscUtil.hasCommandPerm(sender, "mchannel.edittypes"))
+            if (!CommandUtil.hasCommandPerm(sender, "mchannel.edittypes"))
                 return true;
 
             String editTypes = "";
@@ -80,7 +80,7 @@ public class MChannelsCommand implements CommandExecutor {
                 return true;
             }
 
-            if (!MiscUtil.hasCommandPerm(sender, "mchannel.create." + args[1].toLowerCase()))
+            if (!CommandUtil.hasCommandPerm(sender, "mchannel.create." + args[1].toLowerCase()))
                 return true;
 
             ChannelType type = ChannelType.fromName(args[2]);
@@ -126,7 +126,7 @@ public class MChannelsCommand implements CommandExecutor {
                 return true;
             }
 
-            if (!MiscUtil.hasCommandPerm(sender, "mchannel.remove." + args[1].toLowerCase()))
+            if (!CommandUtil.hasCommandPerm(sender, "mchannel.remove." + args[1].toLowerCase()))
                 return true;
 
             if (ChannelManager.getChannel(args[1]) == null) {
@@ -144,7 +144,7 @@ public class MChannelsCommand implements CommandExecutor {
                 return true;
             }
 
-            if (!MiscUtil.hasCommandPerm(sender, "mchannel.edit." + args[1].toLowerCase()))
+            if (!CommandUtil.hasCommandPerm(sender, "mchannel.edit." + args[1].toLowerCase()))
                 return true;
 
             if (ChannelManager.getChannel(args[1]) == null) {
@@ -210,7 +210,7 @@ public class MChannelsCommand implements CommandExecutor {
                 return true;
             }
 
-            if (!MiscUtil.hasCommandPerm(sender, "mchannel.join." + args[1].toLowerCase()))
+            if (!CommandUtil.hasCommandPerm(sender, "mchannel.join." + args[1].toLowerCase()))
                 return true;
 
             Channel channel = ChannelManager.getChannel(args[1]);
@@ -243,7 +243,7 @@ public class MChannelsCommand implements CommandExecutor {
                 return true;
             }
 
-            if (!MiscUtil.hasCommandPerm(sender, "mchannel.leave." + args[1].toLowerCase()))
+            if (!CommandUtil.hasCommandPerm(sender, "mchannel.leave." + args[1].toLowerCase()))
                 return true;
 
             Channel channel = ChannelManager.getChannel(args[1]);
@@ -268,7 +268,7 @@ public class MChannelsCommand implements CommandExecutor {
                 return true;
             }
 
-            if (!MiscUtil.hasCommandPerm(sender, "mchannel.away." + args[1].toLowerCase()))
+            if (!CommandUtil.hasCommandPerm(sender, "mchannel.away." + args[1].toLowerCase()))
                 return true;
 
             Channel channel = ChannelManager.getChannel(args[1]);
@@ -295,7 +295,7 @@ public class MChannelsCommand implements CommandExecutor {
                 return true;
             }
 
-            if (!MiscUtil.hasCommandPerm(sender, "mchannel.back." + args[1].toLowerCase()))
+            if (!CommandUtil.hasCommandPerm(sender, "mchannel.back." + args[1].toLowerCase()))
                 return true;
 
             Channel channel = ChannelManager.getChannel(args[1]);
