@@ -2,7 +2,7 @@ package ca.q0r.mchannels.events;
 
 import ca.q0r.mchannels.channels.Channel;
 import ca.q0r.mchannels.channels.ChannelManager;
-import com.miraclem4n.mchat.api.Parser;
+import ca.q0r.mchat.api.Parser;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;

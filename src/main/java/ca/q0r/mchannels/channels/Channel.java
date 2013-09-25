@@ -1,7 +1,7 @@
 package ca.q0r.mchannels.channels;
 
 import ca.q0r.mchannels.types.ChannelType;
-import com.miraclem4n.mchat.util.MessageUtil;
+import ca.q0r.mchat.util.MessageUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
