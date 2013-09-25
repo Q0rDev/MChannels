@@ -97,7 +97,7 @@
         <dependency>
             <groupId>ca.q0r</groupId>
             <artifactId>MChat</artifactId>
-            <version>1.6.4-R0.1</version>
+            <version>1.6.4-R0.2</version>
             <type>jar</type>
             <scope>compile</scope>
         </dependency>
