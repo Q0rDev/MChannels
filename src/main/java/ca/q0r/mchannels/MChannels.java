@@ -2,7 +2,6 @@ package ca.q0r.mchannels;
 
 import ca.q0r.mchannels.channels.ChannelManager;
 import ca.q0r.mchannels.commands.MChannelsCommand;
-import ca.q0r.mchannels.configs.ChannelUtil;
 import ca.q0r.mchannels.events.ChannelListener;
 import ca.q0r.mchat.util.MessageUtil;
 import ca.q0r.mchat.util.Timer;
@@ -24,20 +23,6 @@ public class MChannels extends JavaPlugin {
         try {
             // Initialize and Start the Timer
             Timer timer = new Timer();
-
-            // Initialize Metrics
-            /*getServer().getScheduler().runTaskLater(this, new BukkitRunnable(){
-				@Override
-				public void run() {
-					try {
-						Metrics metrics = new Metrics(Bukkit.getPluginManager().getPlugin("MChannels"));
-			            metrics.start();
-			        } catch (IOException ignored) {}
-				}
-			}, 200);*/
-
-            // Initialize Config
-            ChannelUtil.initialize();
 
             // Initialize Classes
             ChannelManager.initialize();
@@ -66,9 +51,6 @@ public class MChannels extends JavaPlugin {
             Timer timer = new Timer();
 
             getServer().getScheduler().cancelTasks(this);
-
-            // Kill Config
-            ChannelUtil.dispose();
 
             // Stop the Timer
             timer.stop();

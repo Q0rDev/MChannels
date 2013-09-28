@@ -4,7 +4,7 @@
     <!-- Project information -->
     <groupId>ca.q0r</groupId>
     <artifactId>MChannels</artifactId>
-    <version>1.6.4-R0.2</version>
+    <version>1.6.4-R0.3</version>
     <name>MChannels</name>
     <url>http://mdev.in/</url>
     <description>MChat's Channel Implementation</description>

@@ -1,6 +1,5 @@
 package ca.q0r.mchannels.channels;
 
-import ca.q0r.mchannels.configs.ChannelUtil;
 import ca.q0r.mchannels.types.ChannelEditType;
 import ca.q0r.mchannels.types.ChannelType;
 
@@ -8,10 +7,12 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class ChannelManager {
-    private static Set<Channel> channels = new HashSet<Channel>();
+    private static Set<Channel> channels;
+    private static ChannelYml yml;
 
     public static void initialize() {
         channels = new HashSet<Channel>();
+        yml = new ChannelYml();
 
         loadChannels();
     }
@@ -23,17 +24,17 @@ public class ChannelManager {
     }
 
     /**
-     * Loads Channels from ChannelUtil to Memory.
+     * Loads Channels from yml to Memory.
      */
     public static void loadChannels() {
-        for (String key : ChannelUtil.getConfig().getKeys(false)) {
-            ChannelType type = ChannelType.fromName(ChannelUtil.getConfig().getString(key + ".type"));
-            String prefix = ChannelUtil.getConfig().getString(key + ".prefix", "[");
-            String suffix = ChannelUtil.getConfig().getString(key + ".suffix", "]");
-            Boolean passworded = ChannelUtil.getConfig().getBoolean(key + ".passworded", false);
-            String password = ChannelUtil.getConfig().getString(key + ".password", "");
-            Integer distance = ChannelUtil.getConfig().getInt(key + ".distance", -1);
-            Boolean defaulted = ChannelUtil.getConfig().getBoolean(key + ".default", false);
+        for (String key : yml.getConfig().getKeys(false)) {
+            ChannelType type = ChannelType.fromName(yml.getConfig().getString(key + ".type"));
+            String prefix = yml.getConfig().getString(key + ".prefix", "[");
+            String suffix = yml.getConfig().getString(key + ".suffix", "]");
+            Boolean passworded = yml.getConfig().getBoolean(key + ".passworded", false);
+            String password = yml.getConfig().getString(key + ".password", "");
+            Integer distance = yml.getConfig().getInt(key + ".distance", -1);
+            Boolean defaulted = yml.getConfig().getBoolean(key + ".default", false);
 
             if (type == null) {
                 type = ChannelType.GLOBAL;
@@ -47,33 +48,35 @@ public class ChannelManager {
      * Loads a Channel from the config.
      */
     public static void loadChannel(String name) {
-        ChannelType type = ChannelType.fromName(ChannelUtil.getConfig().getString(name + ".type"));
-        String prefix = ChannelUtil.getConfig().getString(name + ".prefix", "[");
-        String suffix = ChannelUtil.getConfig().getString(name + ".suffix", "]");
-        Boolean passworded = ChannelUtil.getConfig().getBoolean(name + ".passworded", false);
-        String password = ChannelUtil.getConfig().getString(name + ".password", "");
-        Integer distance = ChannelUtil.getConfig().getInt(name + ".distance", -1);
-        Boolean defaulted = ChannelUtil.getConfig().getBoolean(name + ".default", false);
+        ChannelType type = ChannelType.fromName(yml.getConfig().getString(name + ".type"));
+        String prefix = yml.getConfig().getString(name + ".prefix", "[");
+        String suffix = yml.getConfig().getString(name + ".suffix", "]");
+        Boolean passworded = yml.getConfig().getBoolean(name + ".passworded", false);
+        String password = yml.getConfig().getString(name + ".password", "");
+        Integer distance = yml.getConfig().getInt(name + ".distance", -1);
+        Boolean defaulted = yml.getConfig().getBoolean(name + ".default", false);
 
         channels.add(new Channel(name.toLowerCase(), type, prefix, suffix, passworded, password, distance, defaulted));
     }
 
 
     /**
-     * Reloads Channels from ChannelUtil to Memory.
+     * Reloads Channels from yml to Memory.
      */
     public static void reloadChannels() {
-        for (String key : ChannelUtil.getConfig().getKeys(false)) {
+        yml = new ChannelYml();
+
+        for (String key : yml.getConfig().getKeys(false)) {
             if (getChannel(key) != null) {
                 Channel channel = getChannel(key);
 
-                channel.setType(ChannelType.fromName(ChannelUtil.getConfig().getString(key + ".type")));
-                channel.setPrefix(ChannelUtil.getConfig().getString(key + ".prefix", "["));
-                channel.setSuffix(ChannelUtil.getConfig().getString(key + ".suffix", "]"));
-                channel.setPassword(ChannelUtil.getConfig().getString(key + ".password", ""));
-                channel.setPassworded(ChannelUtil.getConfig().getBoolean(key + ".passworded", false), channel.getPassword());
-                channel.setDistance(ChannelUtil.getConfig().getInt(key + ".distance", -1));
-                channel.setDefault(ChannelUtil.getConfig().getBoolean(key + ".default", false));
+                channel.setType(ChannelType.fromName(yml.getConfig().getString(key + ".type")));
+                channel.setPrefix(yml.getConfig().getString(key + ".prefix", "["));
+                channel.setSuffix(yml.getConfig().getString(key + ".suffix", "]"));
+                channel.setPassword(yml.getConfig().getString(key + ".password", ""));
+                channel.setPassworded(yml.getConfig().getBoolean(key + ".passworded", false), channel.getPassword());
+                channel.setDistance(yml.getConfig().getInt(key + ".distance", -1));
+                channel.setDefault(yml.getConfig().getBoolean(key + ".default", false));
             } else {
                 loadChannel(key);
             }
@@ -81,7 +84,7 @@ public class ChannelManager {
     }
 
     /**
-     * Loads Channels from ChannelUtil to Memory.
+     * Loads Channels from yml to Memory.
      * @param name Name of Channel being created.
      * @param type Type of Channel being created.
      * @param prefix Prefix of Channel being created.
@@ -94,23 +97,23 @@ public class ChannelManager {
     public static void createChannel(String name, ChannelType type, String prefix, String suffix, Boolean passworded, String password, Integer distance, Boolean defaulted) {
         channels.add(new Channel(name.toLowerCase(), type, prefix, suffix, passworded, password, distance, defaulted));
 
-        ChannelUtil.getConfig().set(name.toLowerCase() + ".type", type.getName());
-        ChannelUtil.getConfig().set(name.toLowerCase() + ".prefix", prefix);
-        ChannelUtil.getConfig().set(name.toLowerCase() + ".suffix", suffix);
-        ChannelUtil.getConfig().set(name.toLowerCase() + ".passworded", passworded);
-        ChannelUtil.getConfig().set(name.toLowerCase() + ".password", password);
-        ChannelUtil.getConfig().set(name.toLowerCase() + ".distance", distance);
-        ChannelUtil.getConfig().set(name.toLowerCase() + ".default", defaulted);
+        yml.getConfig().set(name.toLowerCase() + ".type", type.getName());
+        yml.getConfig().set(name.toLowerCase() + ".prefix", prefix);
+        yml.getConfig().set(name.toLowerCase() + ".suffix", suffix);
+        yml.getConfig().set(name.toLowerCase() + ".passworded", passworded);
+        yml.getConfig().set(name.toLowerCase() + ".password", password);
+        yml.getConfig().set(name.toLowerCase() + ".distance", distance);
+        yml.getConfig().set(name.toLowerCase() + ".default", defaulted);
 
         if (defaulted) {
             setDefaultChannel(name);
         }
 
-        ChannelUtil.save();
+        yml.save();
     }
 
     /**
-     * Removes a Channel from ChannelUtil/Memory.
+     * Removes a Channel from yml/Memory.
      * @param name Name of Channel being removed.
      */
     public static void removeChannel(String name) {
@@ -126,9 +129,9 @@ public class ChannelManager {
         if (isReal) {
             channels.remove(getChannel(name));
 
-            ChannelUtil.getConfig().set(name, null);
+            yml.getConfig().set(name, null);
 
-            ChannelUtil.save();
+            yml.save();
         }
     }
 
@@ -148,7 +151,7 @@ public class ChannelManager {
     }
 
     /**
-     * Saves all Channels in Memory to ChannelUtil.
+     * Saves all Channels in Memory to yml.
      */
     public static void saveChannels() {
         for (Channel channel : channels) {
@@ -161,15 +164,15 @@ public class ChannelManager {
      * @param channel Channel being saved.
      */
     public static void saveChannel(Channel channel) {
-        ChannelUtil.getConfig().set(channel.getName().toLowerCase() + ".type", channel.getType().getName().toLowerCase());
-        ChannelUtil.getConfig().set(channel.getName().toLowerCase() + ".prefix", channel.getPrefix());
-        ChannelUtil.getConfig().set(channel.getName().toLowerCase() + ".suffix", channel.getSuffix());
-        ChannelUtil.getConfig().set(channel.getName().toLowerCase() + ".passworded", channel.isPassworded());
-        ChannelUtil.getConfig().set(channel.getName().toLowerCase() + ".password", channel.getPassword());
-        ChannelUtil.getConfig().set(channel.getName().toLowerCase() + ".distance", channel.getDistance());
-        ChannelUtil.getConfig().set(channel.getName().toLowerCase() + ".default", channel.isDefault());
+        yml.getConfig().set(channel.getName().toLowerCase() + ".type", channel.getType().getName().toLowerCase());
+        yml.getConfig().set(channel.getName().toLowerCase() + ".prefix", channel.getPrefix());
+        yml.getConfig().set(channel.getName().toLowerCase() + ".suffix", channel.getSuffix());
+        yml.getConfig().set(channel.getName().toLowerCase() + ".passworded", channel.isPassworded());
+        yml.getConfig().set(channel.getName().toLowerCase() + ".password", channel.getPassword());
+        yml.getConfig().set(channel.getName().toLowerCase() + ".distance", channel.getDistance());
+        yml.getConfig().set(channel.getName().toLowerCase() + ".default", channel.isDefault());
 
-        ChannelUtil.save();
+        yml.save();
     }
 
     /**
@@ -240,7 +243,7 @@ public class ChannelManager {
     }
 
     /**
-     * Loads Channels from ChannelUtil to Memory.
+     * Loads Channels from yml to Memory.
      * @param channel Name of Channel being edited.
      * @param type EditType being used.
      * @param option Option being used.
@@ -248,7 +251,7 @@ public class ChannelManager {
     public static void editChannel(Channel channel, ChannelEditType type, Object option) {
         if (option.getClass() == type.getOptionClass()) {
             if (type.getName().equalsIgnoreCase("name")) {
-                ChannelUtil.getConfig().set(channel.getName(), null);
+                yml.getConfig().set(channel.getName(), null);
 
                 channel.setName((String) option);
             } else if (type.getName().equalsIgnoreCase("default")) {
