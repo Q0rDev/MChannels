@@ -3,14 +3,12 @@ package ca.q0r.mchannels.types;
 import java.util.HashMap;
 
 public enum ChannelEditType {
-    DEFAULT("Default", Boolean.class),
-    PASSWORD("Password", String.class),
-    PASSWORDED("Passworded", Boolean.class),
-    TYPE("Type", ChannelType.class),
-    NAME("Name", String.class),
-    PREFIX("Prefix", String.class),
-    SUFFIX("Suffix", String.class),
-    DISTANCE("Distance", Integer.class);
+    DEFAULT("default", Boolean.class),
+    PASSWORD("password", String.class),
+    NAME("name", String.class),
+    PREFIX("prefix", String.class),
+    SUFFIX("suffix", String.class),
+    DISTANCE("distance", Integer.class);
 
     private final String name;
     private final Class<?> clazz;

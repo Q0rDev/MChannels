@@ -10,39 +10,22 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-public class Channel {
-    private HashMap<String, Boolean> occupants;
-    private String name, prefix, suffix, password;
-    private ChannelType type;
-    private Integer distance;
-    private Boolean passworded, defaulted;
+public abstract class Channel {
+    protected HashMap<String, Boolean> occupants;
+    protected String name, prefix, suffix;
+    protected ChannelType type;
+    protected Boolean defaulted;
 
-    public Channel(String name, ChannelType type, String prefix, String suffix, Boolean passworded, String password, Integer distance, Boolean defaulted) {
+    public Channel(String name, ChannelType type, String prefix, String suffix) {
+        this.occupants = new HashMap<String, Boolean>();
+
         this.name = name.toLowerCase();
-        this.type = type;
-
         this.prefix = prefix;
         this.suffix = suffix;
-        this.passworded = passworded;
-        this.password = password;
-        this.distance = distance;
-        this.defaulted = defaulted;
 
-        this.occupants = new HashMap<String, Boolean>();
-    }
+        this.type = type;
 
-    public Channel(String name) {
-        this.name = name.toLowerCase();
-        this.type = ChannelType.GLOBAL;
-
-        this.prefix = "[";
-        this.suffix = "]";
-        this.passworded = false;
-        this.password = "";
-        this.distance = -1;
         this.defaulted = false;
-
-        this.occupants = new HashMap<String, Boolean>();
     }
 
     public void setName(String name) {
@@ -145,93 +128,37 @@ public class Channel {
         return suffix;
     }
 
-    public void setDistance(Integer distance) {
-        if (distance == null) {
-            return;
-        }
-
-        this.distance = distance;
-    }
-
-    public Integer getDistance() {
-        return distance;
-    }
-
-    public Boolean isPassworded() {
-        return passworded;
-    }
-
-    public void setPassworded(Boolean passworded, String password) {
-        if (passworded == null || password == null) {
-            return;
-        }
-
-        type = ChannelType.PASSWORD;
-
-        this.passworded = passworded;
-        this.password = password;
-    }
-
-    public void setPassword(String password) {
-        if (password == null) {
-            return;
-        }
-
-        this.password = password;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
     public Boolean isDefault() {
         return defaulted;
     }
 
     public void setDefault(Boolean defaulted) {
-        if (defaulted == null) {
-            return;
-        }
-
-        this.defaulted = defaulted;
+        this.defaulted = defaulted != null ? defaulted : false;
     }
 
-    public void sendMessageFrom(Player player, String message) {
-        if (player == null || message == null) {
+    public void sendMessage(Player sender, String message) {
+        if (sender == null || message == null) {
             return;
         }
 
         String msg = MessageUtil.addColour(prefix + name + suffix) + " " + message;
 
         for (String names : getActiveOccupants()) {
-            Player playerz = Bukkit.getServer().getPlayer(names);
+            Player player = Bukkit.getServer().getPlayer(names);
 
-            if (playerz == null) {
+            if (player == null) {
                 continue;
             }
 
-            if (getType() == ChannelType.PASSWORD
-                    || getType() == ChannelType.PRIVATE || getType() == ChannelType.GLOBAL) {
-                playerz.sendMessage(msg);
-            } else if (getType() == ChannelType.LOCAL) {
-                if (playerz.getWorld().getName().equals(player.getWorld().getName())
-                        && playerz.getLocation().distance(player.getLocation()) > distance) {
-                    playerz.sendMessage(msg);
-                }
-            } else if (getType() == ChannelType.WORLD) {
-                if (playerz.getWorld().getName().equals(player.getWorld().getName())) {
-                    playerz.sendMessage(msg);
-                }
-            } else if (getType() == ChannelType.CHUNK) {
-                if (playerz.getWorld().getName().equals(player.getWorld().getName())
-                        && playerz.getLocation().getChunk() == player.getLocation().getChunk()) {
-                    playerz.sendMessage(msg);
-                }
-            }
+            MessageUtil.logFormatted("Name:" + this.getName());
+
+            sendMessage(sender, player, msg);
         }
 
         MessageUtil.log(msg);
     }
+
+    protected abstract void sendMessage(Player sender, Player player, String message);
 
     public void broadcastMessage(String message) {
         if (message == null) {

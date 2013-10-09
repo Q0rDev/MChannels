@@ -3,12 +3,15 @@ package ca.q0r.mchannels;
 import ca.q0r.mchannels.channels.ChannelManager;
 import ca.q0r.mchannels.commands.MChannelsCommand;
 import ca.q0r.mchannels.events.ChannelListener;
+import ca.q0r.mchat.metrics.Metrics;
 import ca.q0r.mchat.util.MessageUtil;
 import ca.q0r.mchat.util.Timer;
+import org.bukkit.Bukkit;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.scheduler.BukkitRunnable;
 
 public class MChannels extends JavaPlugin {
     // Default Plugin Data
@@ -23,6 +26,17 @@ public class MChannels extends JavaPlugin {
         try {
             // Initialize and Start the Timer
             Timer timer = new Timer();
+
+            // Initialize Metrics
+            getServer().getScheduler().runTaskLater(this, new BukkitRunnable(){
+                @Override
+                public void run() {
+                    try {
+                        Metrics metrics = new Metrics(Bukkit.getPluginManager().getPlugin("MChannels"));
+                        metrics.start();
+                    } catch (Exception ignored) {}
+                }
+            }, 200);
 
             // Initialize Classes
             ChannelManager.initialize();
