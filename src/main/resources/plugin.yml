@@ -3,7 +3,7 @@ main: ca.q0r.mchannels.MChannels
 version: ${version}-${build.number}
 author: MiracleM4n
 authors: [MiracleM4n]
-website: http://mdev.in/
+website: http://q0r.ca/
 softdepend: [mChatSuite, MChat]
 description: MChat's Channel Implementation
 commands:
