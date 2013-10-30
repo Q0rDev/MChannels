@@ -44,18 +44,8 @@
     <!-- Repository locations -->
     <repositories>
         <repository>
-            <id>bukkit-repo</id>
-            <url>http://repo.bukkit.org/content/groups/public</url>
-            <releases>
-                <updatePolicy>always</updatePolicy>
-            </releases>
-            <snapshots>
-                <updatePolicy>always</updatePolicy>
-            </snapshots>
-        </repository>
-        <repository>
             <id>q0r-repo</id>
-            <url>http://repo.q0r.ca</url>
+            <url>http://nexus.q0r.ca/content/groups/public</url>
             <releases>
                 <updatePolicy>always</updatePolicy>
             </releases>
@@ -101,13 +91,6 @@
 
     <!-- Dependencies -->
     <dependencies>
-        <dependency>
-            <groupId>org.bukkit</groupId>
-            <artifactId>bukkit</artifactId>
-            <version>1.6.4-R0.1-SNAPSHOT</version>
-            <type>jar</type>
-            <scope>compile</scope>
-        </dependency>
         <dependency>
             <groupId>ca.q0r</groupId>
             <artifactId>MChat</artifactId>
