@@ -4,7 +4,7 @@ version: ${version}-${build.number}
 author: MiracleM4n
 authors: [MiracleM4n]
 website: http://q0r.ca/
-softdepend: [mChatSuite, MChat]
+softdepend: [MChat]
 description: MChat's Channel Implementation
 commands:
     mchannel:
