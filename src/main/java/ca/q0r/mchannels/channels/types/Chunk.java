@@ -10,8 +10,7 @@ public class Chunk extends Channel {
     }
 
     public void sendMessage(Player sender, Player player, String message) {
-        if (player.getWorld().getName().equals(sender.getWorld().getName())
-                && player.getLocation().getChunk() == sender.getLocation().getChunk()) {
+        if (player.getLocation().getChunk() == sender.getLocation().getChunk()) {
             player.sendMessage(message);
         }
     }

@@ -1,5 +1,6 @@
 package ca.q0r.mchannels.channels;
 
+import ca.q0r.mchannels.yml.channel.ChannelYml;
 import ca.q0r.mchannels.channels.types.*;
 import ca.q0r.mchannels.types.ChannelEditType;
 import ca.q0r.mchannels.types.ChannelType;
@@ -177,11 +178,13 @@ public class ChannelManager {
      * @param player Player's name being sought.
      * @return Set containing all Channels the Player is Active in.
      */
-    public static Set<Channel> getPlayersActiveChannels(String player) {
-        Set<Channel> channels = new HashSet<Channel>();
+    public static HashSet<Channel> getPlayersActiveChannels(String player) {
+        HashSet<Channel> channels = new HashSet<Channel>();
 
         for (Channel channel : getChannels()) {
-            if (channel.getActiveOccupants().contains(player)) {
+            Occupant occupant = channel.getOccupant(player);
+
+            if (occupant != null && occupant.getState()) {
                 channels.add(channel);
             }
         }
@@ -198,7 +201,7 @@ public class ChannelManager {
         Set<Channel> channels = new HashSet<Channel>();
 
         for (Channel channel : getChannels()) {
-            if (channel.getOccupants().contains(player)) {
+            if (channel.getOccupant(player) != null) {
                 channels.add(channel);
             }
         }

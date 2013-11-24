@@ -12,12 +12,12 @@ public class Global extends Channel {
     }
 
     @Override
-    public void sendMessage(Player sender, String message) {
-        if (sender == null || message == null) {
+    public void sendMessage(Player sender, String format) {
+        if (sender == null || format == null) {
             return;
         }
 
-        String msg = MessageUtil.addColour(prefix + name + suffix) + " " + message;
+        String msg = format.replace("+channel", MessageUtil.addColour(prefix + name + suffix));
 
         for (Player player : Bukkit.getServer().getOnlinePlayers()) {
             sendMessage(sender, player, msg);

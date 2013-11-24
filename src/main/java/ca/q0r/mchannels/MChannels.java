@@ -2,7 +2,8 @@ package ca.q0r.mchannels;
 
 import ca.q0r.mchannels.channels.ChannelManager;
 import ca.q0r.mchannels.commands.MChannelsCommand;
-import ca.q0r.mchannels.events.ChannelListener;
+import ca.q0r.mchannels.events.ChatListener;
+import ca.q0r.mchannels.yml.YmlManager;
 import ca.q0r.mchat.metrics.Metrics;
 import ca.q0r.mchat.util.MessageUtil;
 import ca.q0r.mchat.util.Timer;
@@ -39,6 +40,7 @@ public class MChannels extends JavaPlugin {
             }, 200);
 
             // Initialize Classes
+            YmlManager.initialize();
             ChannelManager.initialize();
 
             // Register Events
@@ -66,6 +68,9 @@ public class MChannels extends JavaPlugin {
 
             getServer().getScheduler().cancelTasks(this);
 
+            // Unload Yml
+            YmlManager.unload();
+
             // Stop the Timer
             timer.stop();
 
@@ -80,7 +85,7 @@ public class MChannels extends JavaPlugin {
     }
 
     void registerEvents() {
-        pm.registerEvents(new ChannelListener(), this);
+        pm.registerEvents(new ChatListener(), this);
     }
 
     void regCommands(String command, CommandExecutor executor) {

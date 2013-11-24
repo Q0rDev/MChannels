@@ -1,4 +1,4 @@
-package ca.q0r.mchannels.channels;
+package ca.q0r.mchannels.yml.channel;
 
 import ca.q0r.mchat.yml.Yml;
 
@@ -6,7 +6,7 @@ import java.io.File;
 
 public class ChannelYml extends Yml {
     public ChannelYml() {
-        super(new File("plugins/MChannels/channels.yml"), "MChat Channels");
+        super(new File("plugins/MChannels/channels.yml"), "MChannels Channels");
 
         if (!file.exists()) {
             loadDefaults();

@@ -2,10 +2,12 @@ package ca.q0r.mchannels.commands;
 
 import ca.q0r.mchannels.channels.Channel;
 import ca.q0r.mchannels.channels.ChannelManager;
+import ca.q0r.mchannels.channels.Occupant;
 import ca.q0r.mchannels.channels.types.*;
 import ca.q0r.mchannels.types.ChannelCommandType;
 import ca.q0r.mchannels.types.ChannelEditType;
 import ca.q0r.mchannels.types.ChannelType;
+import ca.q0r.mchannels.yml.locale.LocaleType;
 import ca.q0r.mchat.api.Parser;
 import ca.q0r.mchat.util.CommandUtil;
 import ca.q0r.mchat.util.MessageUtil;
@@ -94,7 +96,7 @@ public class MChannelsCommand implements CommandExecutor {
         String cName = args[1].toLowerCase();
         Channel channel = ChannelManager.getChannel(cName);
 
-        if (!CommandUtil.hasCommandPerm(sender, cType.getPermission(cName.toLowerCase()))) {
+        if (!CommandUtil.hasCommandPerm(sender, cType.getPermission(cName))) {
             return true;
         }
 
@@ -155,7 +157,7 @@ public class MChannelsCommand implements CommandExecutor {
                 }
 
                 ChannelManager.removeChannel(channel);
-                MessageUtil.sendMessage(sender, "You have successfully removed Channel '" + cName.toLowerCase() + "'.");
+                MessageUtil.sendMessage(sender, "You have successfully removed Channel '" + cName + "'.");
 
                 return true;
             case EDIT:
@@ -176,7 +178,7 @@ public class MChannelsCommand implements CommandExecutor {
                     switch(edit) {
                         case DEFAULT:
                             ChannelManager.setDefaultChannel(channel);
-                            MessageUtil.sendMessage(sender, "You have successfully edited '" + cName.toLowerCase() + "'.");
+                            MessageUtil.sendMessage(sender, "You have successfully edited '" + cName + "'.");
 
                             return true;
                     }
@@ -191,7 +193,7 @@ public class MChannelsCommand implements CommandExecutor {
                 }
 
                 ChannelManager.editChannel(channel, edit, option);
-                MessageUtil.sendMessage(sender, "You have successfully edited '" + cName.toLowerCase() + "'.");
+                MessageUtil.sendMessage(sender, "You have successfully edited '" + cName + "'.");
 
                 return true;
         }
@@ -204,13 +206,15 @@ public class MChannelsCommand implements CommandExecutor {
         Player player = (Player) sender;
 
         if (channel == null) {
-            MessageUtil.sendMessage(sender, "No Channel by the name of '" + cName.toLowerCase() + "' could be found.");
+            MessageUtil.sendMessage(sender, "No Channel by the name of '" + cName + "' could be found.");
             return true;
         }
 
+        Occupant occupant = channel.getOccupant(sender.getName());
+
         switch(cType) {
             case JOIN:
-                if (channel.getOccupants().contains(sender.getName())) {
+                if (occupant != null) {
                     MessageUtil.sendMessage(sender, "You are already in channel '" + cName + "'.");
                     return true;
                 }
@@ -221,27 +225,27 @@ public class MChannelsCommand implements CommandExecutor {
                         MessageUtil.sendMessage(sender, "'" + cName + "' is a Passworded channel. Please use '/" + cmd + " join [ChannelName] [Password]' to enter.");
                         return true;
                     } else if (!args[2].equalsIgnoreCase(((Password) channel).getPassword())) {
-                        MessageUtil.sendMessage(sender, "Password entered for channel '" + cName.toLowerCase() + "' is invalid.");
+                        MessageUtil.sendMessage(sender, "Password entered for channel '" + cName + "' is invalid.");
                         return true;
                     }
                 }
 
-                channel.addOccupant(sender.getName(), true);
-                MessageUtil.sendMessage(sender, "You have successfully joined '" + cName.toLowerCase() + "'.");
+                channel.broadcastMessage(Parser.parseMessage(player.getName(), player.getWorld().getName(), "", LocaleType.FORMAT_JOIN.getRaw()));
+                channel.add(new Occupant(sender.getName()));
+
+                MessageUtil.sendMessage(sender, "You have successfully joined '" + cName + "'.");
 
                 return true;
             case LEAVE:
-                for (String string : channel.getOccupants()) {
-                    MessageUtil.logFormatted(string);
-                }
-
-                if (!channel.getOccupants().contains(sender.getName())) {
+                if (occupant == null) {
                     MessageUtil.sendMessage(sender, "You are not in channel '" + cName + "'.");
                     return true;
                 }
 
-                channel.removeOccupant(sender.getName());
-                MessageUtil.sendMessage(sender, "You have successfully left '" + cName.toLowerCase() + "'.");
+                channel.remove(occupant);
+                channel.broadcastMessage(Parser.parseMessage(player.getName(), player.getWorld().getName(), "", LocaleType.FORMAT_LEAVE.getRaw()));
+
+                MessageUtil.sendMessage(sender, "You have successfully left '" + cName + "'.");
 
                 return true;
             case AWAY:
@@ -273,13 +277,25 @@ public class MChannelsCommand implements CommandExecutor {
     }
 
     private void setAvailability(Player player, Channel channel, Boolean state) {
-        if (!channel.getOccupants().contains(player.getName())) {
+        if (channel.getType() == ChannelType.GLOBAL) {
+            MessageUtil.sendMessage(player, "You cannot change availability in channel '" + channel.getName() + "'.");
+            MessageUtil.sendMessage(player, "This is because it is a Global channel!");
+            return;
+        }
+
+        Occupant occupant = channel.getOccupant(player.getName());
+
+        if (occupant == null) {
             MessageUtil.sendMessage(player, "You are not in channel '" + channel.getName() + "'.");
             return;
         }
 
-        channel.setOccupantAvailability(player.getName(), state);
-        MessageUtil.sendMessage(player, "You are now marked as " + (state ? "available" : "away") + " in channel '" + channel.getName() + "'.");
-        channel.broadcastMessage(Parser.parsePlayerName(player.getName(), player.getWorld().getName()) + " is now " + (state ? "available" : "away") + "!");
+        if (occupant.getState() == state) {
+            MessageUtil.sendMessage(player, "You are already " + (state ? "available" : "away") + " in channel '" + channel.getName() + "'.");
+        } else {
+            occupant.setState(state);
+            MessageUtil.sendMessage(player, "You are now marked as " + (state ? "available" : "away") + " in channel '" + channel.getName() + "'.");
+            channel.broadcastMessage(Parser.parsePlayerName(player.getName(), player.getWorld().getName()) + " is now " + (state ? "available" : "away") + "!");
+        }
     }
 }

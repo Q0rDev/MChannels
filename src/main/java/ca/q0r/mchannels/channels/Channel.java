@@ -1,23 +1,21 @@
 package ca.q0r.mchannels.channels;
 
 import ca.q0r.mchannels.types.ChannelType;
+import ca.q0r.mchannels.yml.locale.LocaleType;
 import ca.q0r.mchat.util.MessageUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
-import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
 
 public abstract class Channel {
-    protected HashMap<String, Boolean> occupants;
+    protected HashSet<Occupant> occupants;
     protected String name, prefix, suffix;
     protected ChannelType type;
     protected Boolean defaulted;
 
     public Channel(String name, ChannelType type, String prefix, String suffix) {
-        this.occupants = new HashMap<String, Boolean>();
+        this.occupants = new HashSet<Occupant>();
 
         this.name = name.toLowerCase();
         this.prefix = prefix;
@@ -40,68 +38,43 @@ public abstract class Channel {
         return name;
     }
 
-    public void setType(ChannelType type) {
-        if (type == null) {
-            type = ChannelType.GLOBAL;
-        }
-
-        this.type = type;
-    }
-
     public ChannelType getType() {
         return type;
     }
 
-    public Set<String> getOccupants() {
-        return occupants.keySet();
+    public HashSet<Occupant> getOccupants() {
+        return occupants;
     }
 
-    public Set<String> getActiveOccupants() {
-        Set<String> set = new HashSet<String>();
+    public HashSet<Occupant> getActiveOccupants() {
+        HashSet<Occupant> set = new HashSet<Occupant>();
 
-        for (Map.Entry<String, Boolean> entry : occupants.entrySet()) {
-            if (entry.getValue()) {
-                set.add(entry.getKey());
+        for (Occupant occupant : occupants) {
+            System.out.println(occupant.getName() + ": " + occupant.getState());
+            if (occupant.getState()) {
+                set.add(occupant);
             }
         }
 
         return set;
     }
 
-    public void addOccupant(String occupant) {
-        addOccupant(occupant, true);
+    public void add(Occupant occupant) {
+        occupants.add(occupant);
     }
 
-    public void addOccupant(String occupant, Boolean state) {
-        if (occupant == null || state == null) {
-            return;
-        }
-
-        occupants.put(occupant, state);
-    }
-
-    public void removeOccupant(String occupant) {
-        if (occupant == null || occupants.get(occupant) == null) {
-            return;
-        }
-
+    public void remove(Occupant occupant) {
         occupants.remove(occupant);
     }
 
-    public Boolean getOccupantAvailability(String occupant) {
-        if (occupant == null || occupants.get(occupant) == null) {
-            return false;
+    public Occupant getOccupant(String name) {
+        for (Occupant occupant : occupants) {
+            if (occupant.getName().equalsIgnoreCase(name)) {
+                return occupant;
+            }
         }
 
-        return occupants.get(occupant);
-    }
-
-    public void setOccupantAvailability(String occupant, Boolean state) {
-        if (occupant == null || state == null || occupants.get(occupant) == null) {
-            return;
-        }
-
-        occupants.put(occupant, state);
+        return null;
     }
 
     public void setPrefix(String prefix) {
@@ -136,45 +109,40 @@ public abstract class Channel {
         this.defaulted = defaulted != null ? defaulted : false;
     }
 
-    public void sendMessage(Player sender, String message) {
-        if (sender == null || message == null) {
+    public void sendMessage(Player sender, String format) {
+        if (sender == null || format == null) {
             return;
         }
 
-        String msg = MessageUtil.addColour(prefix + name + suffix) + " " + message;
+        String msg = format.replace("+channel", MessageUtil.addColour(prefix + name + suffix));
 
-        for (String names : getActiveOccupants()) {
-            Player player = Bukkit.getServer().getPlayer(names);
+        for (Occupant occupant : getActiveOccupants()) {
+            Player recipient = Bukkit.getPlayer(occupant.getName());
 
-            if (player == null) {
-                continue;
+            if (recipient != null) {
+                sendMessage(sender, recipient, msg);
             }
-
-            MessageUtil.logFormatted("Name:" + this.getName());
-
-            sendMessage(sender, player, msg);
         }
 
         MessageUtil.log(msg);
     }
 
-    protected abstract void sendMessage(Player sender, Player player, String message);
+    protected abstract void sendMessage(Player sender, Player recipient, String message);
 
     public void broadcastMessage(String message) {
         if (message == null) {
             return;
         }
 
-        String msg = MessageUtil.addColour(prefix + name + suffix + " " + message);
+        String format = LocaleType.FORMAT_BROADCAST.getRaw();
+        String msg = format.replace("+channel", MessageUtil.addColour(prefix + name + suffix)).replace("+msg", message);
 
-        for (String names : getActiveOccupants()) {
-            Player playerz = Bukkit.getServer().getPlayer(names);
+        for (Occupant occupant : getActiveOccupants()) {
+            Player recipient = Bukkit.getPlayer(occupant.getName());
 
-            if (playerz == null) {
-                continue;
+            if (recipient != null) {
+                recipient.sendMessage(msg);
             }
-
-            playerz.sendMessage(msg);
         }
 
         MessageUtil.log(msg);
