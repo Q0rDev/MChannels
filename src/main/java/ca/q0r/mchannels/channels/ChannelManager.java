@@ -1,9 +1,9 @@
 package ca.q0r.mchannels.channels;
 
-import ca.q0r.mchannels.yml.channel.ChannelYml;
 import ca.q0r.mchannels.channels.types.*;
 import ca.q0r.mchannels.types.ChannelEditType;
 import ca.q0r.mchannels.types.ChannelType;
+import ca.q0r.mchannels.yml.channel.ChannelYml;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -45,7 +45,7 @@ public class ChannelManager {
             type = ChannelType.GLOBAL;
         }
 
-        switch(type) {
+        switch (type) {
             case GLOBAL:
                 channel = new Global(name, prefix, suffix);
                 break;
@@ -83,6 +83,7 @@ public class ChannelManager {
 
     /**
      * Looks for a Channel in Memory.
+     *
      * @param name Name of Channel being sought after.
      * @return Channel being sought after or null.
      */
@@ -104,6 +105,7 @@ public class ChannelManager {
 
     /**
      * Saves a Channel to yml.
+     *
      * @param channel Channel being saved.
      */
     public static void saveChannel(Channel channel) {
@@ -137,6 +139,7 @@ public class ChannelManager {
 
     /**
      * Reads Default Channel from Memory.
+     *
      * @return Default Channel or null.
      */
     public static Channel getDefaultChannel() {
@@ -151,6 +154,7 @@ public class ChannelManager {
 
     /**
      * Makes a Channel the Default Channel.
+     *
      * @param channel Channel being defaulted.
      */
     public static void setDefaultChannel(Channel channel) {
@@ -175,6 +179,7 @@ public class ChannelManager {
 
     /**
      * Reads Player's Active Channels
+     *
      * @param player Player's name being sought.
      * @return Set containing all Channels the Player is Active in.
      */
@@ -194,6 +199,7 @@ public class ChannelManager {
 
     /**
      * Reads Player's Channels
+     *
      * @param player Player's name being sought.
      * @return Set containing all Channels the Player is in.
      */
@@ -212,6 +218,7 @@ public class ChannelManager {
 
     /**
      * Adds a Channel to yml/Memory.
+     *
      * @param channel Channel being added.
      */
     public static void addChannel(Channel channel) {
@@ -226,9 +233,10 @@ public class ChannelManager {
 
     /**
      * Edits a channel.
+     *
      * @param channel Channel being edited.
-     * @param type EditType being used.
-     * @param option Option being used.
+     * @param type    EditType being used.
+     * @param option  Option being used.
      */
     public static void editChannel(Channel channel, ChannelEditType type, Object option) {
         String name = channel.getName();
@@ -248,12 +256,12 @@ public class ChannelManager {
                     break;
                 case DISTANCE:
                     removeChannel(channel);
-                    channel = new Local(name, prefix, suffix, (Integer)option);
+                    channel = new Local(name, prefix, suffix, (Integer) option);
 
                     break;
                 case PASSWORD:
                     removeChannel(channel);
-                    channel = new Password(name, prefix, suffix, (String)option);
+                    channel = new Password(name, prefix, suffix, (String) option);
                     break;
                 case PREFIX:
                     channel.setPrefix((String) option);
@@ -271,6 +279,7 @@ public class ChannelManager {
 
     /**
      * Removes a Channel from yml/Memory.
+     *
      * @param channel Channel being removed.
      */
     public static void removeChannel(Channel channel) {

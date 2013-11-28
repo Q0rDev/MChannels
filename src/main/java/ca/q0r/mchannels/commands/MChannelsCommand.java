@@ -17,7 +17,8 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 public class MChannelsCommand implements CommandExecutor {
-    public MChannelsCommand() { }
+    public MChannelsCommand() {
+    }
 
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         String cmd = command.getName();
@@ -49,7 +50,7 @@ public class MChannelsCommand implements CommandExecutor {
             return true;
         }
 
-        switch(cType) {
+        switch (cType) {
             case RELOAD:
                 if (!CommandUtil.hasCommandPerm(sender, cType.getPermission())) {
                     return true;
@@ -117,7 +118,7 @@ public class MChannelsCommand implements CommandExecutor {
                 String prefix = "[";
                 String suffix = "]";
 
-                switch(type) {
+                switch (type) {
                     case GLOBAL:
                         channel = new Global(cName, prefix, suffix);
                         break;
@@ -175,7 +176,7 @@ public class MChannelsCommand implements CommandExecutor {
                 Object option = args[3];
 
                 try {
-                    switch(edit) {
+                    switch (edit) {
                         case DEFAULT:
                             ChannelManager.setDefaultChannel(channel);
                             MessageUtil.sendMessage(sender, "You have successfully edited '" + cName + "'.");
@@ -212,7 +213,7 @@ public class MChannelsCommand implements CommandExecutor {
 
         Occupant occupant = channel.getOccupant(sender.getName());
 
-        switch(cType) {
+        switch (cType) {
             case JOIN:
                 if (occupant != null) {
                     MessageUtil.sendMessage(sender, "You are already in channel '" + cName + "'.");
@@ -260,7 +261,7 @@ public class MChannelsCommand implements CommandExecutor {
     }
 
     private void sendDefaultMessage(CommandSender sender, String cmd) {
-        String[] message = new String[] {
+        String[] message = new String[]{
                 MessageUtil.format("'/" + cmd + " reload' to reload."),
                 MessageUtil.format("'/" + cmd + " types' for more information."),
                 MessageUtil.format("'/" + cmd + " editTypes' for more information."),

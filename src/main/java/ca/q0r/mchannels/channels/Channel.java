@@ -49,8 +49,7 @@ public abstract class Channel {
     public HashSet<Occupant> getActiveOccupants() {
         HashSet<Occupant> set = new HashSet<Occupant>();
 
-        for (Occupant occupant : occupants) {
-            System.out.println(occupant.getName() + ": " + occupant.getState());
+        for (Occupant occupant : getOccupants()) {
             if (occupant.getState()) {
                 set.add(occupant);
             }
