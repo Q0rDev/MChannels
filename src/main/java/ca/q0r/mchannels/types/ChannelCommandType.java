@@ -48,7 +48,7 @@ public enum ChannelCommandType {
             return null;
         }
 
-        return  "Please use'/" + cmd + " "+ help;
+        return "Please use'/" + cmd + " " + help;
     }
 
     public Integer getLength() {

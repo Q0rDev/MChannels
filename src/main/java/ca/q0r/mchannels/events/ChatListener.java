@@ -16,7 +16,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class ChatListener implements Listener {
-    public ChatListener() { }
+    public ChatListener() {
+    }
 
     @EventHandler(priority = EventPriority.LOWEST)
     public void onPlayerChat(AsyncPlayerChatEvent event) {

@@ -29,13 +29,14 @@ public class MChannels extends JavaPlugin {
             Timer timer = new Timer();
 
             // Initialize Metrics
-            getServer().getScheduler().runTaskLater(this, new BukkitRunnable(){
+            getServer().getScheduler().runTaskLater(this, new BukkitRunnable() {
                 @Override
                 public void run() {
                     try {
                         Metrics metrics = new Metrics(Bukkit.getPluginManager().getPlugin("MChannels"));
                         metrics.start();
-                    } catch (Exception ignored) {}
+                    } catch (Exception ignored) {
+                    }
                 }
             }, 200);
 
@@ -56,7 +57,7 @@ public class MChannels extends JavaPlugin {
             long diff = timer.difference();
 
             MessageUtil.log("[" + pdfFile.getName() + "] " + pdfFile.getName() + " v" + pdfFile.getVersion() + " is enabled! [" + diff + "ms]");
-        } catch(NoClassDefFoundError ignored) {
+        } catch (NoClassDefFoundError ignored) {
             pm.disablePlugin(this);
         }
     }
@@ -78,7 +79,7 @@ public class MChannels extends JavaPlugin {
             long diff = timer.difference();
 
             MessageUtil.log("[" + pdfFile.getName() + "] " + pdfFile.getName() + " v" + pdfFile.getVersion() + " is disabled! [" + diff + "ms]");
-        } catch(NoClassDefFoundError ignored) {
+        } catch (NoClassDefFoundError ignored) {
             System.err.println("[" + pdfFile.getName() + "] MChat not found disabling!");
             System.out.println("[" + pdfFile.getName() + "] " + pdfFile.getName() + " v" + pdfFile.getVersion() + " is disabled!");
         }

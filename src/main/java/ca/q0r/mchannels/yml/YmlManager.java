@@ -12,7 +12,7 @@ public class YmlManager {
     }
 
     public static Yml getYml(YmlType type) {
-        switch(type) {
+        switch (type) {
             case LOCALE_YML:
                 return localeYml;
         }
@@ -21,7 +21,7 @@ public class YmlManager {
     }
 
     public static void reloadYml(YmlType type) {
-        switch(type) {
+        switch (type) {
             case LOCALE_YML:
                 localeYml = new LocaleYml();
                 localeYml.loadDefaults();
