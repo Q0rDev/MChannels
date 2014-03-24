@@ -5,7 +5,7 @@
     <!-- Project information -->
     <groupId>ca.q0r</groupId>
     <artifactId>MChannels</artifactId>
-    <version>1.7.2-R0.1-SNAPSHOT</version>
+    <version>1.7.2-R1.0</version>
     <name>MChannels</name>
     <url>http://q0r.ca/</url>
     <description>MChat's Channel Implementation</description>
@@ -96,7 +96,7 @@
         <dependency>
             <groupId>ca.q0r</groupId>
             <artifactId>MChat</artifactId>
-            <version>1.7.2-R0.1-SNAPSHOT</version>
+            <version>1.7.2-R1.0</version>
             <type>jar</type>
             <scope>compile</scope>
         </dependency>
