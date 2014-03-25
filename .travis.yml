@@ -6,16 +6,15 @@ jdk: oraclejdk7
 before_install:
   - "git clone https://github.com/Q0rDev/travis-ci-resources.git target/travis"
   - "chmod +x target/travis/build.sh"
-  - "gem install --version 0.8.0 faraday"
-  - "gem install travis-artifacts"
+  - "chmod +x target/travis/upload.sh"
 
 # Compile and package JAR and set build properties.
 install: ./target/travis/build.sh
 script: true
 
-# Push artifacts to AWS.
+# Upload to DBO if release build.
 after_success:
-  - travis-artifacts upload --path target/*.jar --target-path artifacts/$TRAVIS_REPO_SLUG/$TRAVIS_BUILD_NUMBER
+  - "./target/travis/upload.sh"
 
 notifications:
   # Disable build status email notifications, until the issue with forks is fixed.
@@ -26,9 +25,8 @@ notifications:
 
 env:
   global:
+    # Nexus Deployment
     - secure: "gmA1SJmEmRjnPhGvdAHQnhQRpd0ijQEUXwJio3l82oS+T/VEJVf4HW1eqRGt8U9ruVqc8cQc4wFUNBZ0JMBWbD3JnqcgWkPFlsx4ylzwxp2r54IYKEfGjaDbnGOcDMCgIxqvPSxVBIa4GfUOTFSr+hKcAA9vJt91DcG57dY03PI="
     - secure: "MDiFJgtSEfJDgRnaOfihj1UCOXhF2Blvcws6OwERwXibWXnjNa3TgTTpXg5ecEQio3dUMTPYaer9E9V1YmzBCi3CAhgW1fp007GD0qNkAbCPuNVKeLADws4zULSPtx78rzu4rT2yf3Td0didOGkd/+1bNKvNMoIXipMoXHD2wrE="
-    - "ARTIFACTS_AWS_REGION=us-east-1"
-    - "ARTIFACTS_S3_BUCKET=q0r-artifacts"
-    - secure: "c/HdYCPLTRlzkDgfCqEJgcuMe8b4AfcfDpgkdw6/ht+hTbgpFLL4GKjQ3bwIg2DhE9KwI1y+j6U8fuiGBGGWIHSEEOiSyjFoeB9YCcffA2Lohihjbbeq3ycz0w4k1VyeBhNPenycu8+05dIhX2dz+148LxGZSOIh6WhYlU7ruGY="
-    - secure: "GziPztDs5ZAqrX2QNdJeC6aEVoxG0fJjSbuIyofXCYFccYnH8vXCFuGxoShDHeg3JevSdwQB0U9x8ss6h7uAx59fkJyRp6MYbQbRmRrY8jbcHZuREDIQhdQdsez5yeVN2cZ2PmER2YYYCLTJHzuAjFJb19HTqco7V8Zrj2up3vo="
+    # Bukkit
+    - secure: "epEsWidYIxn783I54URycxCgIwdwkTb6rrWcO3xIn384aThLsoKs/fJLXwGf7jTpx7gsDJhz4JQ8v0CLrwzLo6GFiPtjqkidhnrCywdZnrO+fKVDeZBNqgTr5mGWTWbqCLxHzHuCN7cDmaETrws24y2+tcBT1jhOnCN1b82M6io="
