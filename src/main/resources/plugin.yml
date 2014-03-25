@@ -1,6 +1,6 @@
 name: MChannels
 main: ca.q0r.mchannels.MChannels
-version: ${version}-${buildNumber}
+version: ${version}-${commit}
 author: MiracleM4n
 authors: [MiracleM4n]
 website: http://q0r.ca/
