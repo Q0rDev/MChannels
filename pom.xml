@@ -6,7 +6,7 @@
     <name>MChannels</name>
     <artifactId>MChannels</artifactId>
     <packaging>jar</packaging>
-    <version>1.7.2-R1.0.0-BETA</version>
+    <version>1.7.2-R0.0.1-SNAPSHOT</version>
     <url>https://github.com/Q0rDev/MChannels</url>
     <description>MChat's Channel Implementation</description>
 
