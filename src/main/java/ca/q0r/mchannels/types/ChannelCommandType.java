@@ -17,7 +17,7 @@ public enum ChannelCommandType {
     private final String name, help;
     private final Integer length;
 
-    private static final HashMap<String, ChannelCommandType> nMap = new HashMap<String, ChannelCommandType>();
+    private static final HashMap<String, ChannelCommandType> nMap = new HashMap<>();
 
     static {
         for (ChannelCommandType type : values()) {

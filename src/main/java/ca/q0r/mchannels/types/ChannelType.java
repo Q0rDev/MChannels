@@ -12,7 +12,7 @@ public enum ChannelType {
 
     private final String name;
 
-    private static final HashMap<String, ChannelType> nMap = new HashMap<String, ChannelType>();
+    private static final HashMap<String, ChannelType> nMap = new HashMap<>();
 
     static {
         for (ChannelType type : values()) {

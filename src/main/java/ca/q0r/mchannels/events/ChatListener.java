@@ -31,7 +31,7 @@ public class ChatListener implements Listener {
         String msg = arr.length > 1 ? arr[1] : "";
 
         Player player = event.getPlayer();
-        HashSet<Channel> channels = new HashSet<Channel>();
+        HashSet<Channel> channels = new HashSet<>();
 
         if (cName.equalsIgnoreCase("all")) {
             channels = ChannelManager.getPlayersActiveChannels(player.getName());

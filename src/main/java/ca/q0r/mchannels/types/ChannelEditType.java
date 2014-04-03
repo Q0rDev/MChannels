@@ -13,7 +13,7 @@ public enum ChannelEditType {
     private final String name;
     private final Class<?> clazz;
 
-    private static final HashMap<String, ChannelEditType> nMap = new HashMap<String, ChannelEditType>();
+    private static final HashMap<String, ChannelEditType> nMap = new HashMap<>();
 
     static {
         for (ChannelEditType type : values()) {

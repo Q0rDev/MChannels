@@ -15,7 +15,7 @@ public abstract class Channel {
     protected Boolean defaulted;
 
     public Channel(String name, ChannelType type, String prefix, String suffix) {
-        this.occupants = new HashSet<Occupant>();
+        this.occupants = new HashSet<>();
 
         this.name = name.toLowerCase();
         this.prefix = prefix;
@@ -47,7 +47,7 @@ public abstract class Channel {
     }
 
     public HashSet<Occupant> getActiveOccupants() {
-        HashSet<Occupant> set = new HashSet<Occupant>();
+        HashSet<Occupant> set = new HashSet<>();
 
         for (Occupant occupant : getOccupants()) {
             if (occupant.getState()) {
