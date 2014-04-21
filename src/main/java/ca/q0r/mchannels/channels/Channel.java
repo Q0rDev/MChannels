@@ -7,6 +7,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 import java.util.HashSet;
+import java.util.UUID;
 
 public abstract class Channel {
     protected HashSet<Occupant> occupants;
@@ -66,9 +67,9 @@ public abstract class Channel {
         occupants.remove(occupant);
     }
 
-    public Occupant getOccupant(String name) {
+    public Occupant getOccupant(UUID uuid) {
         for (Occupant occupant : occupants) {
-            if (occupant.getName().equalsIgnoreCase(name)) {
+            if (occupant.getUuid().toString().equalsIgnoreCase(uuid.toString())) {
                 return occupant;
             }
         }
@@ -116,7 +117,7 @@ public abstract class Channel {
         String msg = format.replace("+channel", MessageUtil.addColour(prefix + name + suffix));
 
         for (Occupant occupant : getActiveOccupants()) {
-            Player recipient = Bukkit.getPlayer(occupant.getName());
+            Player recipient = Bukkit.getPlayer(occupant.getUuid());
 
             if (recipient != null) {
                 sendMessage(sender, recipient, msg);
@@ -137,7 +138,7 @@ public abstract class Channel {
         String msg = format.replace("+channel", MessageUtil.addColour(prefix + name + suffix)).replace("+msg", message);
 
         for (Occupant occupant : getActiveOccupants()) {
-            Player recipient = Bukkit.getPlayer(occupant.getName());
+            Player recipient = Bukkit.getPlayer(occupant.getUuid());
 
             if (recipient != null) {
                 recipient.sendMessage(msg);

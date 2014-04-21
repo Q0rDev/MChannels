@@ -7,6 +7,7 @@ import ca.q0r.mchannels.yml.channel.ChannelYml;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.UUID;
 
 public class ChannelManager {
     private static Set<Channel> channels;
@@ -180,14 +181,14 @@ public class ChannelManager {
     /**
      * Reads Player's Active Channels
      *
-     * @param player Player's name being sought.
+     * @param uuid Player's UUID being sought.
      * @return Set containing all Channels the Player is Active in.
      */
-    public static HashSet<Channel> getPlayersActiveChannels(String player) {
+    public static HashSet<Channel> getPlayersActiveChannels(UUID uuid) {
         HashSet<Channel> channels = new HashSet<>();
 
         for (Channel channel : getChannels()) {
-            Occupant occupant = channel.getOccupant(player);
+            Occupant occupant = channel.getOccupant(uuid);
 
             if (occupant != null && occupant.getState()) {
                 channels.add(channel);
@@ -200,14 +201,14 @@ public class ChannelManager {
     /**
      * Reads Player's Channels
      *
-     * @param player Player's name being sought.
+     * @param uuid Player's UUID being sought.
      * @return Set containing all Channels the Player is in.
      */
-    public static Set<Channel> getPlayersChannels(String player) {
+    public static Set<Channel> getPlayersChannels(UUID uuid) {
         Set<Channel> channels = new HashSet<>();
 
         for (Channel channel : getChannels()) {
-            if (channel.getOccupant(player) != null) {
+            if (channel.getOccupant(uuid) != null) {
                 channels.add(channel);
             }
         }

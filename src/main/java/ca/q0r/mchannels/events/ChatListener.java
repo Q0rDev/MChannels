@@ -14,6 +14,7 @@ import org.bukkit.event.player.PlayerJoinEvent;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.UUID;
 
 public class ChatListener implements Listener {
     public ChatListener() {
@@ -34,12 +35,12 @@ public class ChatListener implements Listener {
         HashSet<Channel> channels = new HashSet<>();
 
         if (cName.equalsIgnoreCase("all")) {
-            channels = ChannelManager.getPlayersActiveChannels(player.getName());
+            channels = ChannelManager.getPlayersActiveChannels(player.getUniqueId());
         } else {
             Channel channel = ChannelManager.getChannel(cName);
 
             if (channel != null) {
-                Occupant occupant = channel.getOccupant(player.getName());
+                Occupant occupant = channel.getOccupant(player.getUniqueId());
 
                 if (occupant != null && occupant.getState()) {
                     channels.add(channel);
@@ -60,21 +61,21 @@ public class ChatListener implements Listener {
 
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event) {
-        String pName = event.getPlayer().getName();
+        UUID pUUID = event.getPlayer().getUniqueId();
         String world = event.getPlayer().getWorld().getName();
 
         Channel dChannel = ChannelManager.getDefaultChannel();
-        Set<Channel> cChannel = ChannelManager.getPlayersActiveChannels(pName);
+        Set<Channel> cChannel = ChannelManager.getPlayersActiveChannels(pUUID);
 
         if (cChannel.size() < 1 && dChannel != null) {
-            dChannel.add(new Occupant(pName));
-            dChannel.broadcastMessage(Parser.parseMessage(pName, world, "", LocaleType.FORMAT_JOIN.getRaw()));
+            dChannel.add(new Occupant(pUUID));
+            dChannel.broadcastMessage(Parser.parseMessage(pUUID, world, "", LocaleType.FORMAT_JOIN.getRaw()));
         }
     }
 
     private String getFormat(Player player, String message) {
         String format = LocaleType.FORMAT_MESSAGE.getRaw();
 
-        return Parser.parseMessage(player.getName(), player.getWorld().getName(), message, format);
+        return Parser.parseMessage(player.getUniqueId(), player.getWorld().getName(), message, format);
     }
 }

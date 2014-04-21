@@ -211,7 +211,7 @@ public class MChannelsCommand implements CommandExecutor {
             return true;
         }
 
-        Occupant occupant = channel.getOccupant(sender.getName());
+        Occupant occupant = channel.getOccupant(player.getUniqueId());
 
         switch (cType) {
             case JOIN:
@@ -231,8 +231,8 @@ public class MChannelsCommand implements CommandExecutor {
                     }
                 }
 
-                channel.broadcastMessage(Parser.parseMessage(player.getName(), player.getWorld().getName(), "", LocaleType.FORMAT_JOIN.getRaw()));
-                channel.add(new Occupant(sender.getName()));
+                channel.broadcastMessage(Parser.parseMessage(player.getUniqueId(), player.getWorld().getName(), "", LocaleType.FORMAT_JOIN.getRaw()));
+                channel.add(new Occupant(player.getUniqueId()));
 
                 MessageUtil.sendMessage(sender, "You have successfully joined '" + cName + "'.");
 
@@ -244,7 +244,7 @@ public class MChannelsCommand implements CommandExecutor {
                 }
 
                 channel.remove(occupant);
-                channel.broadcastMessage(Parser.parseMessage(player.getName(), player.getWorld().getName(), "", LocaleType.FORMAT_LEAVE.getRaw()));
+                channel.broadcastMessage(Parser.parseMessage(player.getUniqueId(), player.getWorld().getName(), "", LocaleType.FORMAT_LEAVE.getRaw()));
 
                 MessageUtil.sendMessage(sender, "You have successfully left '" + cName + "'.");
 
@@ -284,7 +284,7 @@ public class MChannelsCommand implements CommandExecutor {
             return;
         }
 
-        Occupant occupant = channel.getOccupant(player.getName());
+        Occupant occupant = channel.getOccupant(player.getUniqueId());
 
         if (occupant == null) {
             MessageUtil.sendMessage(player, "You are not in channel '" + channel.getName() + "'.");
@@ -296,7 +296,7 @@ public class MChannelsCommand implements CommandExecutor {
         } else {
             occupant.setState(state);
             MessageUtil.sendMessage(player, "You are now marked as " + (state ? "available" : "away") + " in channel '" + channel.getName() + "'.");
-            channel.broadcastMessage(Parser.parsePlayerName(player.getName(), player.getWorld().getName()) + " is now " + (state ? "available" : "away") + "!");
+            channel.broadcastMessage(Parser.parsePlayerName(player.getUniqueId(), player.getWorld().getName()) + " is now " + (state ? "available" : "away") + "!");
         }
     }
 }
