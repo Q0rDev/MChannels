@@ -30,3 +30,5 @@ env:
     - secure: "MDiFJgtSEfJDgRnaOfihj1UCOXhF2Blvcws6OwERwXibWXnjNa3TgTTpXg5ecEQio3dUMTPYaer9E9V1YmzBCi3CAhgW1fp007GD0qNkAbCPuNVKeLADws4zULSPtx78rzu4rT2yf3Td0didOGkd/+1bNKvNMoIXipMoXHD2wrE="
     # Bukkit
     - secure: "epEsWidYIxn783I54URycxCgIwdwkTb6rrWcO3xIn384aThLsoKs/fJLXwGf7jTpx7gsDJhz4JQ8v0CLrwzLo6GFiPtjqkidhnrCywdZnrO+fKVDeZBNqgTr5mGWTWbqCLxHzHuCN7cDmaETrws24y2+tcBT1jhOnCN1b82M6io="
+    # AWS
+    - secure: "O4QxlTEeXJSxuUhC7nF/f3wIHGTXiZwmlxEAWtS2aQLnmPNz3ah84lRc6OoeI7TP2nxRDsNZMH9uQcPWFtnAFIirhQ2CIuq9FXwUJ5ZNcHn8T69l056iidbpiFb+iLOWtYhTOSYCJEYrK97se1lxQOWkQfdOL/1F18CFXFewHpc="
