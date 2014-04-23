@@ -12,8 +12,12 @@ before_install:
 install: ./target/travis/build.sh
 script: true
 
-# Upload to DBO if release build.
+# Upload to DBO if release build / Upload to AWS always.
 after_success:
+  - "./target/travis/upload.sh"
+
+# Upload to AWS Always
+after_failure:
   - "./target/travis/upload.sh"
 
 notifications:
