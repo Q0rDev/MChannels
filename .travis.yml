@@ -9,8 +9,7 @@ before_install:
   - "chmod +x target/travis/upload.sh"
 
 # Compile and package JAR and set build properties.
-install: ./target/travis/build.sh
-script: true
+script: ./target/travis/build.sh
 
 # Upload to DBO if release build / Upload to AWS always.
 after_success:
