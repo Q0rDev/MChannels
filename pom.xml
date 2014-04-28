@@ -6,7 +6,7 @@
     <name>MChannels</name>
     <artifactId>MChannels</artifactId>
     <packaging>jar</packaging>
-    <version>1.7.2-R0.0.1-SNAPSHOT</version>
+    <version>1.7.9-R0.0.1-SNAPSHOT</version>
     <url>https://github.com/Q0rDev/MChannels</url>
     <description>MChat's Channel Implementation</description>
 
@@ -42,7 +42,7 @@
         <dependency>
             <groupId>ca.q0r</groupId>
             <artifactId>MChat</artifactId>
-            <version>1.7.2-R0.0.2-SNAPSHOT</version>
+            <version>1.7.9-R0.0.1-SNAPSHOT</version>
             <type>jar</type>
             <scope>compile</scope>
         </dependency>
