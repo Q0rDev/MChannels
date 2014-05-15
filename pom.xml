@@ -42,7 +42,7 @@
         <dependency>
             <groupId>ca.q0r</groupId>
             <artifactId>MChat</artifactId>
-            <version>1.7.9-R0.1.1-BETA</version>
+            <version>1.7.9-R0.1.2-SNAPSHOT</version>
             <type>jar</type>
             <scope>compile</scope>
         </dependency>
