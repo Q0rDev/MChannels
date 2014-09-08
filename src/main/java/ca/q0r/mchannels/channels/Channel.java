@@ -16,7 +16,7 @@ public abstract class Channel {
     protected Boolean defaulted;
 
     public Channel(String name, ChannelType type, String prefix, String suffix) {
-        this.occupants = new HashSet<>();
+        this.occupants = new HashSet<Occupant>();
 
         this.name = name.toLowerCase();
         this.prefix = prefix;
@@ -27,16 +27,16 @@ public abstract class Channel {
         this.defaulted = false;
     }
 
+    public String getName() {
+        return name;
+    }
+
     public void setName(String name) {
         if (name == null) {
             return;
         }
 
         this.name = name.toLowerCase();
-    }
-
-    public String getName() {
-        return name;
     }
 
     public ChannelType getType() {
@@ -48,7 +48,7 @@ public abstract class Channel {
     }
 
     public HashSet<Occupant> getActiveOccupants() {
-        HashSet<Occupant> set = new HashSet<>();
+        HashSet<Occupant> set = new HashSet<Occupant>();
 
         for (Occupant occupant : getOccupants()) {
             if (occupant.getState()) {
@@ -77,6 +77,10 @@ public abstract class Channel {
         return null;
     }
 
+    public String getPrefix() {
+        return prefix;
+    }
+
     public void setPrefix(String prefix) {
         if (prefix == null) {
             return;
@@ -85,8 +89,8 @@ public abstract class Channel {
         this.prefix = prefix;
     }
 
-    public String getPrefix() {
-        return prefix;
+    public String getSuffix() {
+        return suffix;
     }
 
     public void setSuffix(String suffix) {
@@ -95,10 +99,6 @@ public abstract class Channel {
         }
 
         this.suffix = suffix;
-    }
-
-    public String getSuffix() {
-        return suffix;
     }
 
     public Boolean isDefault() {

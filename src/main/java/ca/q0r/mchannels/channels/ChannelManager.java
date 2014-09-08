@@ -14,7 +14,7 @@ public class ChannelManager {
     private static ChannelYml yml;
 
     public static void initialize() {
-        channels = new HashSet<>();
+        channels = new HashSet<Channel>();
         yml = new ChannelYml();
 
         loadChannels();
@@ -185,7 +185,7 @@ public class ChannelManager {
      * @return Set containing all Channels the Player is Active in.
      */
     public static HashSet<Channel> getPlayersActiveChannels(UUID uuid) {
-        HashSet<Channel> channels = new HashSet<>();
+        HashSet<Channel> channels = new HashSet<Channel>();
 
         for (Channel channel : getChannels()) {
             Occupant occupant = channel.getOccupant(uuid);
@@ -205,7 +205,7 @@ public class ChannelManager {
      * @return Set containing all Channels the Player is in.
      */
     public static Set<Channel> getPlayersChannels(UUID uuid) {
-        Set<Channel> channels = new HashSet<>();
+        Set<Channel> channels = new HashSet<Channel>();
 
         for (Channel channel : getChannels()) {
             if (channel.getOccupant(uuid) != null) {

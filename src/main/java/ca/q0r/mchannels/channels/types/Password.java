@@ -17,15 +17,15 @@ public class Password extends Channel {
         player.sendMessage(message);
     }
 
+    public String getPassword() {
+        return password;
+    }
+
     public void setPassword(String password) {
         if (password == null) {
             return;
         }
 
         this.password = password;
-    }
-
-    public String getPassword() {
-        return password;
     }
 }

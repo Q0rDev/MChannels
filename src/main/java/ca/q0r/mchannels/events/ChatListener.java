@@ -9,7 +9,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
-import org.bukkit.event.player.AsyncPlayerChatEvent;
+import org.bukkit.event.player.PlayerChatEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 
 import java.util.HashSet;
@@ -21,7 +21,7 @@ public class ChatListener implements Listener {
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
-    public void onPlayerChat(AsyncPlayerChatEvent event) {
+    public void onPlayerChat(PlayerChatEvent event) {
         if (event.isCancelled() || !event.getMessage().startsWith("@")) {
             return;
         }
@@ -32,7 +32,7 @@ public class ChatListener implements Listener {
         String msg = arr.length > 1 ? arr[1] : "";
 
         Player player = event.getPlayer();
-        HashSet<Channel> channels = new HashSet<>();
+        HashSet<Channel> channels = new HashSet<Channel>();
 
         if (cName.equalsIgnoreCase("all")) {
             channels = ChannelManager.getPlayersActiveChannels(player.getUniqueId());

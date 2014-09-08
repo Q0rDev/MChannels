@@ -9,29 +9,18 @@ public enum ChannelEditType {
     PREFIX("prefix", String.class),
     SUFFIX("suffix", String.class),
     DISTANCE("distance", Integer.class);
-
-    private final String name;
-    private final Class<?> clazz;
-
-    private static final HashMap<String, ChannelEditType> nMap = new HashMap<>();
-
+    private static final HashMap<String, ChannelEditType> nMap = new HashMap<String, ChannelEditType>();
     static {
         for (ChannelEditType type : values()) {
             nMap.put(type.name.toLowerCase(), type);
         }
     }
+    private final String name;
+    private final Class<?> clazz;
 
     ChannelEditType(String name, Class<?> clazz) {
         this.name = name;
         this.clazz = clazz;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public Class<?> getOptionClass() {
-        return clazz;
     }
 
     public static ChannelEditType fromName(String name) {
@@ -40,5 +29,13 @@ public enum ChannelEditType {
         }
 
         return nMap.get(name.toLowerCase());
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public Class<?> getOptionClass() {
+        return clazz;
     }
 }

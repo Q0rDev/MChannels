@@ -20,15 +20,15 @@ public class Local extends Channel {
         }
     }
 
+    public Integer getDistance() {
+        return distance;
+    }
+
     public void setDistance(Integer distance) {
         if (distance == null) {
             return;
         }
 
         this.distance = distance;
-    }
-
-    public Integer getDistance() {
-        return distance;
     }
 }

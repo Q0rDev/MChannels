@@ -13,22 +13,27 @@ public enum ChannelCommandType {
     LEAVE("leave", "leave [ChannelName]'.", 2),
     AWAY("away", "away [ChannelName]'.", 2),
     BACK("back", "back [ChannelName]'.", 2);
-
-    private final String name, help;
-    private final Integer length;
-
-    private static final HashMap<String, ChannelCommandType> nMap = new HashMap<>();
-
+    private static final HashMap<String, ChannelCommandType> nMap = new HashMap<String, ChannelCommandType>();
     static {
         for (ChannelCommandType type : values()) {
             nMap.put(type.name.toLowerCase(), type);
         }
     }
+    private final String name, help;
+    private final Integer length;
 
     ChannelCommandType(String name, String help, Integer length) {
         this.name = name;
         this.help = help;
         this.length = length;
+    }
+
+    public static ChannelCommandType fromName(String name) {
+        if (name == null) {
+            return null;
+        }
+
+        return nMap.get(name.toLowerCase());
     }
 
     public String getPermission() {
@@ -53,13 +58,5 @@ public enum ChannelCommandType {
 
     public Integer getLength() {
         return length;
-    }
-
-    public static ChannelCommandType fromName(String name) {
-        if (name == null) {
-            return null;
-        }
-
-        return nMap.get(name.toLowerCase());
     }
 }
